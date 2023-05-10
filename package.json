@@ -1,5 +1,5 @@
 {
-  "name": "next-expo-solito-monorepo",
+  "name": "srwor-space",
   "private": true,
   "workspaces": [
     "apps/*",
