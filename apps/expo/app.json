@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "myapp",
-    "slug": "myapp",
-    "scheme": "myapp",
+    "name": "SrworSpace",
+    "slug": "SrworSpace",
+    "scheme": "SrworSpace",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,14 +18,14 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.tamagui.myapp"
+      "bundleIdentifier": "com.tamagui.srworspace"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.tamagui.myapp"
+      "package": "com.tamagui.srworspace"
     },
     "web": {
       "favicon": "./assets/favicon.png",
