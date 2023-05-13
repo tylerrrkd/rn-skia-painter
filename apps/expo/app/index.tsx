@@ -3,8 +3,11 @@ import { Stack } from 'expo-router'
 import { ButtonText } from '@my/ui'
 import { Settings } from '@tamagui/lucide-icons'
 import { useMemo } from 'react'
+import { useTranslation } from '@my/locales'
 
 export default function Screen() {
+  const { t } = useTranslation()
+
   const isConnected = false
 
   const disabled = useMemo(() => !isConnected, [isConnected])
@@ -19,7 +22,11 @@ export default function Screen() {
               <Settings />
             </ButtonText>
           ),
-          headerRight: () => <ButtonText {...{ disabled }}>未连接</ButtonText>,
+          headerRight: () => (
+            <ButtonText {...{ disabled }}>
+              {isConnected ? t('connected') : t('unconnected')}
+            </ButtonText>
+          ),
         }}
       />
       <HomeScreen />

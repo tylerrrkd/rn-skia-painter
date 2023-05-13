@@ -7,6 +7,7 @@
     "*.css"
   ],
   "dependencies": {
+    "@my/locales": "*",
     "@my/ui": "*",
     "@tamagui/animations-react-native": "latest",
     "@tamagui/colors": "latest",
