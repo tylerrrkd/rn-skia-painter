@@ -1,12 +1,11 @@
 import translations from './config/en-US.json'
 
 export enum Locale {
-  en = 'en-US',
-  zh = 'zh-CN',
+  en = 'en',
+  zh = 'zh',
 }
 
 export interface Language {
-  code: string
   language: string
   locale: Locale
 }

@@ -1,11 +1,11 @@
 import { Language, Locale } from '../types'
 
-export const EN: Language = { locale: Locale.en, language: 'English', code: 'en' }
-export const ZHCN: Language = { locale: Locale.zh, language: '简体中文', code: 'zh-cn' }
+export const EN: Language = { locale: Locale.en, language: 'English' }
+export const ZH: Language = { locale: Locale.zh, language: '简体中文' }
 
 export const languages: Record<Locale, Language> = {
   [Locale.en]: EN,
-  [Locale.zh]: ZHCN,
+  [Locale.zh]: ZH,
 }
 
 export const locales: Record<Locale, Record<string, string>> = {

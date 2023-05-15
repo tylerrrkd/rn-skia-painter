@@ -15,7 +15,7 @@ export const fetchLocale = (locale: Locale) => {
 /**
  * get code form storage or device's default
  */
-export const getLanguageCodeFromStorageOrDevice = async () => {
+export const getLanguageCodeFromStorageOrDevice = async (): Promise<Locale> => {
   try {
     const codeFromStorage = await AsyncStorage?.getItem?.(KEY_LOCALES) as Locale
 
