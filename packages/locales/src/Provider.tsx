@@ -8,16 +8,16 @@ import { getLocales } from 'expo-localization'
 
 const systemLanguageCode = getLocales()?.[0]?.languageCode
 
-const initLanguage = languageList.find((language) => language.locale === systemLanguageCode)
+const initLanguage = languageList.find((language) => language.code === systemLanguageCode)
 
 const initialState: ProviderState = {
   currentLanguage: initLanguage || EN,
 }
 
-const initialLocale = initialState.currentLanguage.locale
+const initialLocale = initialState.currentLanguage.code
 
 // Export the translations directly
-const languageMap = new Map<Language['locale'], Record<string, string>>()
+const languageMap = new Map<Language['code'], Record<string, string>>()
 languageMap.set(initialLocale, locales[initialLocale] || {})
 
 export const LanguageContext = createContext<ContextApi | undefined>(undefined)
@@ -36,9 +36,7 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }
         const currentLocale = fetchLocale(codeFromStorage)
         if (currentLocale) {
           languageMap.set(codeFromStorage, currentLocale)
-          const currentLanguage = languageList.find(
-            (language) => language.locale === codeFromStorage
-          )
+          const currentLanguage = languageList.find((language) => language.code === codeFromStorage)
           setState((prevState) => ({
             ...prevState,
             currentLanguage: currentLanguage as Language,
@@ -52,7 +50,7 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }
 
   const translate: TranslateFunction = useCallback(
     (key) => {
-      const translationSet = languageMap.get(currentLanguage.locale) ?? {}
+      const translationSet = languageMap.get(currentLanguage.code) ?? {}
       const translatedText = translationSet?.[key] || key
       return translatedText
     },
@@ -61,18 +59,18 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }
 
   const setLanguage = useCallback(
     async (language: Language) => {
-      if (languageMap.has(language.locale)) {
-        AsyncStorage?.setItem?.(KEY_LOCALES, language.locale)
+      if (languageMap.has(language.code)) {
+        AsyncStorage?.setItem?.(KEY_LOCALES, language.code)
         setState((prevState) => ({
           ...prevState,
           currentLanguage: language,
         }))
       } else {
         try {
-          const locale = fetchLocale(language.locale)
+          const locale = fetchLocale(language.code)
           if (locale) {
-            languageMap.set(language.locale, locale)
-            AsyncStorage?.setItem?.(KEY_LOCALES, language.locale)
+            languageMap.set(language.code, locale)
+            AsyncStorage?.setItem?.(KEY_LOCALES, language.code)
             setState((prevState) => ({
               ...prevState,
               currentLanguage: language,

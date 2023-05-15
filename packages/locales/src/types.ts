@@ -1,13 +1,13 @@
 import translations from './config/en-US.json'
 
-export enum Locale {
+export enum LanguageCode {
   en = 'en',
   zh = 'zh',
 }
 
 export interface Language {
   language: string
-  locale: Locale
+  code: LanguageCode
 }
 
 export interface ProviderState {
