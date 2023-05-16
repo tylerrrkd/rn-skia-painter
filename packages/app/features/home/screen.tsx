@@ -11,13 +11,11 @@ export function HomeScreen() {
   return (
     <YStack f={1} p="$4" space>
       <YStack f={1} jc="center" ai="center">
-        <Button circular>{t('start')}</Button>
+        <Button theme={'SliderTrack'}>{t('start')}</Button>
       </YStack>
-      <YStack bottom={bottom}>
-        <XStack>
-          <Button f={1}>{t('file list')}</Button>
-        </XStack>
-      </YStack>
+      <XStack bottom={bottom}>
+        <Button f={1}>{t('file list')}</Button>
+      </XStack>
     </YStack>
   )
 }

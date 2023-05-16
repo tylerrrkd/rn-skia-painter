@@ -1,10 +1,29 @@
-import { createTamagui } from 'tamagui'
+import { createTamagui, createTheme, createTokens } from 'tamagui'
 import { createInterFont } from '@tamagui/font-inter'
 import { shorthands } from '@tamagui/shorthands'
-import { themes, tokens } from '@tamagui/themes'
+import { themes as defaultThemes, tokens as defaultTokens } from '@tamagui/themes'
 import { createMedia } from '@tamagui/react-native-media-driver'
 
 import { animations } from './animations'
+
+const tokens = createTokens({
+  ...defaultTokens,
+  color: {
+    ...defaultTokens.color,
+    primary: '#F78F21',
+  },
+})
+
+const themes = {
+  light: createTheme({
+    ...defaultThemes.light,
+    primary: tokens.color.primary,
+  }),
+  dark: createTheme({
+    ...defaultThemes.dark,
+    primary: tokens.color.primary,
+  }),
+}
 
 const headingFont = createInterFont({
   size: {

@@ -1,6 +1,6 @@
 import { HomeScreen } from 'app/features/home/screen'
 import { Stack } from 'expo-router'
-import { ButtonText } from '@my/ui'
+import { ButtonText, useTheme } from '@my/ui'
 import { Settings } from '@tamagui/lucide-icons'
 import { useMemo } from 'react'
 import { useTranslation } from '@my/locales'
@@ -11,6 +11,8 @@ export default function Screen() {
   const isConnected = false
 
   const disabled = useMemo(() => !isConnected, [isConnected])
+
+  const theme = useTheme()
 
   return (
     <>
@@ -27,6 +29,11 @@ export default function Screen() {
               {isConnected ? t('connected') : t('unconnected')}
             </ButtonText>
           ),
+          headerShadowVisible: false,
+          contentStyle: {
+            borderTopColor: theme['primary'].val,
+            borderTopWidth: 1,
+          },
         }}
       />
       <HomeScreen />
