@@ -19,10 +19,10 @@ const themes = {
     ...defaultThemes.light,
     primary: tokens.color.primary,
   }),
-  dark: createTheme({
-    ...defaultThemes.dark,
-    primary: tokens.color.primary,
-  }),
+  // dark: createTheme({
+  //   ...defaultThemes.dark,
+  //   primary: tokens.color.primary,
+  // }),
 }
 
 const headingFont = createInterFont({
@@ -77,6 +77,7 @@ export const config = createTamagui({
   fonts: {
     heading: headingFont,
     body: bodyFont,
+    true: bodyFont,
   },
   themes,
   tokens,
