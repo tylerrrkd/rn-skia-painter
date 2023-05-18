@@ -1,4 +1,4 @@
-import { Button, Text, XStack, YStack } from '@my/ui'
+import { Button, SRRoundButton, XStack, YStack } from '@my/ui'
 // import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -9,12 +9,16 @@ export function HomeScreen() {
   const { t } = useTranslation()
 
   return (
-    <YStack f={1} p="$4" space>
+    <YStack backgroundColor={'white'} f={1} p="$4" space>
       <YStack f={1} jc="center" ai="center">
-        <Button>{t('start')}</Button>
+        <SRRoundButton w={'$12'} h={'$12'}>
+          {t('start')}
+        </SRRoundButton>
       </YStack>
       <XStack bottom={bottom}>
-        <Button f={1}>{t('file list')}</Button>
+        <Button color="white" backgroundColor={'$primary'} f={1}>
+          {t('file list')}
+        </Button>
       </XStack>
     </YStack>
   )
