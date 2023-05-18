@@ -1,6 +1,6 @@
 import { HomeScreen } from 'app/features/home/screen'
 import { Stack } from 'expo-router'
-import { ButtonText, getTokens } from '@my/ui'
+import { ButtonText } from '@my/ui'
 import { Settings } from '@tamagui/lucide-icons'
 import { useMemo } from 'react'
 import { useTranslation } from '@my/locales'
@@ -29,7 +29,7 @@ export default function Screen() {
           ),
           headerShadowVisible: false,
           contentStyle: {
-            borderTopColor: "$color",
+            borderTopColor: '#F78F21',
             borderTopWidth: 1,
           },
         }}
