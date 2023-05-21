@@ -1,6 +1,5 @@
 import { HomeScreen } from 'app/features/home/screen'
-import { Stack } from 'expo-router'
-import { ButtonText } from '@my/ui'
+import { ButtonText, SRScreen } from '@my/ui'
 import { Settings } from '@tamagui/lucide-icons'
 import { useMemo } from 'react'
 import { useTranslation } from '@my/locales'
@@ -14,7 +13,7 @@ export default function Screen() {
 
   return (
     <>
-      <Stack.Screen
+      <SRScreen
         options={{
           title: '',
           headerLeft: () => (
@@ -27,11 +26,6 @@ export default function Screen() {
               {isConnected ? t('connected') : t('unconnected')}
             </ButtonText>
           ),
-          headerShadowVisible: false,
-          contentStyle: {
-            borderTopColor: '#F78F21',
-            borderTopWidth: 1,
-          },
         }}
       />
       <HomeScreen />
