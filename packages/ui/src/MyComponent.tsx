@@ -5,13 +5,20 @@ export const SRYStack = styled(YStack, {
   variants: {} as const,
 })
 
-export const SRRoundButton = styled(Button, {
-  name: 'SRRoundButton',
+export const SRButton = styled(Button, {
+  name: 'SRButton',
   acceptsClassName: true,
   color: 'white',
+  backgroundColor: '$primary',
+  pressStyle: {
+    borderColor: '$colorTransparent',
+    backgroundColor: '$primaryPressBackground',
+  },
+})
+
+export const SRRoundButton = styled(SRButton, {
+  name: 'SRRoundButton',
+  acceptsClassName: true,
   fontSize: 22,
   borderRadius: '100%',
-  backgroundColor: '$primary',
-  borderStyle: 'solid',
-  borderColor: 'white',
 })

@@ -11,6 +11,7 @@ const tokens = createTokens({
   color: {
     ...defaultTokens.color,
     primary: '#F78F21',
+    primaryPressBackground: 'rgba(247,143,33,0.6)',
   },
 })
 
