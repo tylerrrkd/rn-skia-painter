@@ -5,7 +5,7 @@ export const SRScreen: React.FC<React.ComponentProps<typeof Stack.Screen>> = (pr
   <Stack.Screen
     {...props}
     options={{
-      headerTintColor: "black",
+      headerTintColor: 'black',
       headerShadowVisible: false,
       contentStyle: {
         borderTopColor: '#F78F21',
@@ -26,9 +26,10 @@ export const SRButton = styled(Button, {
   acceptsClassName: true,
   color: 'white',
   backgroundColor: '$primary',
+  borderWidth: 0,
   pressStyle: {
-    borderColor: '$colorTransparent',
-    backgroundColor: '$primaryPressBackground',
+    opacity: 0.6,
+    backgroundColor: '$primary',
   },
 })
 
@@ -37,4 +38,18 @@ export const SRRoundButton = styled(SRButton, {
   acceptsClassName: true,
   fontSize: 22,
   borderRadius: '100%',
+})
+
+export const SRIconButton = styled(SRButton, {
+  name: 'SRIconButton',
+  acceptsClassName: true,
+  color: '$primary',
+  borderStyle: 'solid',
+  borderColor: '$primary',
+  backgroundColor: '$backgroundTransparent',
+  pressStyle: {
+    opacity: 0.6,
+    borderColor: '$primary',
+    backgroundColor: '$backgroundTransparent',
+  },
 })

@@ -3,5 +3,14 @@
   "unconnected": "未连接",
   "start": "开始",
   "file list": "文件列表",
-  "language could not found": "找不到该语言"
+  "language could not found": "找不到该语言",
+  "carve scene": "雕刻场景",
+  "material": "素材",
+  "text": "文字",
+  "brush": "画笔",
+  "album": "相册",
+  "preview": "预览",
+  "next": "下一步",
+  "scan file": "扫描文件",
+  "choose file": "选择文件"
 }

@@ -3,5 +3,14 @@
   "unconnected": "unconnected",
   "start": "start",
   "file list": "file list",
-  "language could not found": "language could not found"
+  "language could not found": "language could not found",
+  "carve scene": "carve scene",
+  "material": "material",
+  "text": "text",
+  "brush": "brush",
+  "album": "album",
+  "preview": "preview",
+  "next": "next",
+  "scan file": "scan file",
+  "choose file": "choose file"
 }
