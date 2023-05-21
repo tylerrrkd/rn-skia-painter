@@ -10,8 +10,8 @@ export const FileListScreen = () => {
 
   return (
     <YStack backgroundColor={'white'} flex={1} bottom={bottom}>
-      <YGroup borderRadius={0} scrollable flex={1}>
-        {Array.from({ length: 20 }).map((_file, key) => (
+      <YGroup backgroundColor={'white'} borderRadius={0} scrollable flex={1}>
+        {Array.from({ length: 11 }).map((_file, key) => (
           <YGroup.Item key={key}>
             <ListItem
               backgroundColor={'white'}
