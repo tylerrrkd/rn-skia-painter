@@ -4,7 +4,7 @@ import { Settings } from '@tamagui/lucide-icons'
 import { useMemo } from 'react'
 import { useTranslation } from '@my/locales'
 
-export default function Screen() {
+export default () => {
   const { t } = useTranslation()
 
   const isConnected = false
