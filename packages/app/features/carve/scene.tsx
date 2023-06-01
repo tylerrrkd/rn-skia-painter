@@ -8,7 +8,7 @@ export function CarveScene() {
   const { t } = useTranslation()
 
   return (
-    <YStack backgroundColor={'white'} f={1} p="$4" space>
+    <YStack f={1} p="$4" space>
       <YStack f={1} jc="center" ai="center">
         <SRRoundButton w={'$12'} h={'$12'}>
           {t('start')}

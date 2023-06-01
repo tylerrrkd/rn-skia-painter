@@ -9,7 +9,7 @@ export const FileListScreen = () => {
   const { t } = useTranslation()
 
   return (
-    <YStack backgroundColor={'white'} flex={1}>
+    <YStack flex={1}>
       <YGroup backgroundColor={'white'} borderRadius={0} scrollable flex={1}>
         {Array.from({ length: 11 }).map((_file, key) => (
           <YGroup.Item key={key}>

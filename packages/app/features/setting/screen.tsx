@@ -21,7 +21,7 @@ export const SettingScreen = () => {
   const { t } = useTranslation()
 
   return (
-    <YStack backgroundColor={'white'} flex={1} paddingHorizontal={'$4'}>
+    <YStack flex={1} paddingHorizontal={'$4'}>
       <ScrollView mt="$2.5" flex={1}>
         <YStack space="$2.5">
           <SRListItem icon={<Languages />} title={t('language setting')} />
