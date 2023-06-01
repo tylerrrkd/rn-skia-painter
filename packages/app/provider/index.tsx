@@ -6,8 +6,14 @@ import { ToastViewport } from './ToastViewport'
 import config from '../tamagui.config'
 
 export function Provider({ children, ...rest }: Omit<TamaguiProviderProps, 'config'>) {
+  const scheme = useColorScheme()
   return (
-    <TamaguiProvider config={config} disableInjectCSS defaultTheme={'light'} {...rest}>
+    <TamaguiProvider
+      config={config}
+      disableInjectCSS
+      defaultTheme={scheme === 'dark' ? 'dark' : 'light'}
+      {...rest}
+    >
       <LanguageProvider>
         <ToastProvider
           swipeDirection="horizontal"

@@ -1,5 +1,6 @@
 import { Button, styled, YStack } from 'tamagui'
 import { Stack } from 'expo-router'
+import { commonColors } from './theme/tokens'
 
 export const SRScreen: React.FC<React.ComponentProps<typeof Stack.Screen>> = (props) => (
   <Stack.Screen
@@ -8,7 +9,7 @@ export const SRScreen: React.FC<React.ComponentProps<typeof Stack.Screen>> = (pr
       headerTintColor: 'black',
       headerShadowVisible: false,
       contentStyle: {
-        borderTopColor: '#F78F21',
+        borderTopColor: commonColors.primary,
         borderTopWidth: 1,
       },
       ...props.options,
