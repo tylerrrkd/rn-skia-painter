@@ -9,7 +9,7 @@ export const FileListScreen = () => {
   const { t } = useTranslation()
 
   return (
-    <YStack backgroundColor={'white'} flex={1} bottom={bottom}>
+    <YStack backgroundColor={'white'} flex={1}>
       <YGroup backgroundColor={'white'} borderRadius={0} scrollable flex={1}>
         {Array.from({ length: 11 }).map((_file, key) => (
           <YGroup.Item key={key}>
@@ -30,7 +30,7 @@ export const FileListScreen = () => {
           </YGroup.Item>
         ))}
       </YGroup>
-      <XStack space="$4" justifyContent="center">
+      <XStack space="$4" justifyContent="center" bottom={bottom}>
         <SRIconButton
           color={'black'}
           height={'$8'}
