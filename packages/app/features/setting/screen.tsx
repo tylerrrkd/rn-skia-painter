@@ -1,9 +1,9 @@
-import { ListItem, ScrollView, YStack } from '@my/ui'
+import { ListItem, SRSelector, ScrollView, Select, YStack } from '@my/ui'
 import React from 'react'
-import { useTranslation } from '@my/locales'
-import { Languages, Link } from '@tamagui/lucide-icons'
+import { languageList, useTranslation } from '@my/locales'
+import { Languages, Link, ChevronRight } from '@tamagui/lucide-icons'
 
-const SRListItem: React.FC<React.ComponentProps<typeof ListItem>> = ({ title, icon }) => (
+const SRListItem: React.FC<React.ComponentProps<typeof ListItem>> = ({ title, icon, ...props }) => (
   <ListItem
     borderRadius={'$2'}
     backgroundColor={'white'}
@@ -15,16 +15,40 @@ const SRListItem: React.FC<React.ComponentProps<typeof ListItem>> = ({ title, ic
     pressStyle={{
       opacity: 0.6,
     }}
+    {...props}
   />
 )
 export const SettingScreen = () => {
-  const { t } = useTranslation()
+  const { t, currentLanguage, setLanguage } = useTranslation()
 
   return (
     <YStack flex={1} paddingHorizontal={'$4'}>
       <ScrollView mt="$2.5" flex={1}>
         <YStack space="$2.5">
-          <SRListItem icon={<Languages />} title={t('language setting')} />
+          <SRSelector
+            native
+            value={currentLanguage.code}
+            onValueChange={(languageCode) => {
+              const language = languageList.find(({ code }) => languageCode === code)
+              language && setLanguage(language)
+            }}
+            options={languageList?.map?.(({ language, code }) => ({
+              label: language,
+              value: code,
+            }))}
+            trigger={() => (
+              <SRListItem
+                icon={<Languages />}
+                title={t('language setting')}
+                iconAfter={
+                  <>
+                    <Select.Value />
+                    <ChevronRight />
+                  </>
+                }
+              />
+            )}
+          />
           <SRListItem icon={<Link />} title={t('connect IP address')} />
         </YStack>
       </ScrollView>
