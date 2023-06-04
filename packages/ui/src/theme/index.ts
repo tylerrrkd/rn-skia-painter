@@ -15,40 +15,28 @@ type ColorName = keyof typeof colorTokens.dark
 const lightTransparent = 'rgba(255,255,255,0)'
 const darkTransparent = 'rgba(10,10,10,0)'
 
+// color index for template
+const lightPalette = [
+  lightTransparent, // button frame
+  '#fff', // backgroundTransparent
+  '#f9f9f9', // background & backgroundFocus
+  'hsl(0, 0%, 97.3%)',
+  '#ddd',
+  'hsl(0, 0%, 94.0%)',
+  'hsl(0, 0%, 92.0%)', // border
+  'hsl(0, 0%, 89.5%)',
+  'hsl(0, 0%, 81.0%)',
+  'hsl(0, 0%, 56.1%)',
+  'hsl(0, 0%, 50.3%)',
+  'hsl(0, 0%, 42.5%)',
+  'hsl(0, 0%, 9.0%)', // text
+  darkTransparent,
+]
+
 // background => foreground
 const palettes = {
-  dark: [
-    lightTransparent, // button frame
-    '#fff', // backgroundTransparent
-    '#f9f9f9', // background & backgroundFocus
-    'hsl(0, 0%, 97.3%)',
-    'hsl(0, 0%, 95.1%)',
-    'hsl(0, 0%, 94.0%)',
-    'hsl(0, 0%, 92.0%)', // border
-    'hsl(0, 0%, 89.5%)',
-    'hsl(0, 0%, 81.0%)',
-    'hsl(0, 0%, 56.1%)',
-    'hsl(0, 0%, 50.3%)',
-    'hsl(0, 0%, 42.5%)',
-    'hsl(0, 0%, 9.0%)', // text
-    darkTransparent,
-  ],
-  light: [
-    lightTransparent, // button frame
-    '#fff', // backgroundTransparent
-    '#f9f9f9', // background & backgroundFocus
-    'hsl(0, 0%, 97.3%)',
-    'hsl(0, 0%, 95.1%)',
-    'hsl(0, 0%, 94.0%)',
-    'hsl(0, 0%, 92.0%)', // border
-    'hsl(0, 0%, 89.5%)',
-    'hsl(0, 0%, 81.0%)',
-    'hsl(0, 0%, 56.1%)',
-    'hsl(0, 0%, 50.3%)',
-    'hsl(0, 0%, 42.5%)',
-    'hsl(0, 0%, 9.0%)', // text
-    darkTransparent,
-  ],
+  dark: lightPalette,
+  light: lightPalette,
 }
 
 const templateColors = {
