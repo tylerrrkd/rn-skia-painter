@@ -27,6 +27,7 @@ export const SettingScreen = () => {
         <YStack space="$2.5">
           <SRSelector
             native
+            title={t('select language')}
             value={currentLanguage.code}
             onValueChange={(languageCode) => {
               const language = languageList.find(({ code }) => languageCode === code)

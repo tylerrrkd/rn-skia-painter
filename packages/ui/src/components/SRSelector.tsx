@@ -42,7 +42,7 @@ export function SRSelector({
       )}
       <Adapt platform="touch">
         <Sheet native modal dismissOnSnapToBottom>
-          <Sheet.Frame>
+          <Sheet.Frame padding="$2">
             <Sheet.ScrollView>
               <Adapt.Contents />
             </Sheet.ScrollView>
@@ -53,7 +53,11 @@ export function SRSelector({
       <Select.Content zIndex={1000}>
         <Select.Viewport minWidth={200}>
           <Select.Group>
-            {title && <Select.Label {...titleProps}>{title}</Select.Label>}
+            {title && (
+              <Select.Label textAlign="center" {...titleProps}>
+                {title}
+              </Select.Label>
+            )}
             {options?.map?.(({ label, value }, i) => {
               return (
                 <Select.Item index={i} key={i} value={value}>
