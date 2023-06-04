@@ -40,6 +40,9 @@ const headingFont = createInterFont({
 
 const bodyFont = createInterFont(
   {
+    size: {
+      5: 14,
+    },
     face: {
       700: { normal: 'InterBold' },
     },

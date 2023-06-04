@@ -16,5 +16,8 @@
   "setting": "setting",
   "language setting": "language setting",
   "connect IP address": "connect IP address",
-  "select language": "select language"
+  "select language": "select language",
+  "confirm": "confirm",
+  "cancel": "cancel",
+  "enter IP address on the motherboard": "enter IP address on the motherboard"
 }
