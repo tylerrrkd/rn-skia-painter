@@ -1,23 +1,35 @@
-import { ListItem, SRSelector, ScrollView, Select, YStack } from '@my/ui'
-import React from 'react'
+import {
+  GetProps,
+  ListItem,
+  SRSelector,
+  ScrollView,
+  Select,
+  YStack,
+  SRConnectIPDialog,
+} from '@my/ui'
+import React, { forwardRef } from 'react'
 import { languageList, useTranslation } from '@my/locales'
 import { Languages, Link, ChevronRight } from '@tamagui/lucide-icons'
 
-const SRListItem: React.FC<React.ComponentProps<typeof ListItem>> = ({ title, icon, ...props }) => (
-  <ListItem
-    borderRadius={'$2'}
-    backgroundColor={'white'}
-    borderWidth={1}
-    borderStyle={'solid'}
-    borderColor={'#989898'}
-    icon={React.cloneElement(icon as JSX.Element, { size: '$1.5', color: '$primary' })}
-    title={title}
-    pressStyle={{
-      opacity: 0.6,
-    }}
-    {...props}
-  />
+const SRListItem: React.FC<GetProps<typeof ListItem>> = forwardRef(
+  ({ title, icon, ...props }, ref) => (
+    <ListItem
+      ref={ref}
+      borderRadius={'$2'}
+      backgroundColor={'white'}
+      borderWidth={'$0.5'}
+      borderStyle={'solid'}
+      borderColor={'$border'}
+      icon={React.cloneElement(icon as JSX.Element, { size: '$1.5', color: '$primary' })}
+      title={title}
+      pressStyle={{
+        opacity: 0.6,
+      }}
+      {...props}
+    />
+  )
 )
+
 export const SettingScreen = () => {
   const { t, currentLanguage, setLanguage } = useTranslation()
 
@@ -50,7 +62,9 @@ export const SettingScreen = () => {
               />
             )}
           />
-          <SRListItem icon={<Link />} title={t('connect IP address')} />
+          <SRConnectIPDialog
+            trigger={<SRListItem icon={<Link />} title={t('connect IP address')} />}
+          />
         </YStack>
       </ScrollView>
     </YStack>

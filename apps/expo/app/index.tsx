@@ -1,5 +1,5 @@
 import { HomeScreen } from 'app/features/home/screen'
-import { ButtonText, SRIconButton, SRScreen } from '@my/ui'
+import { ButtonText, SRConnectIPDialog, SRIconButton, SRScreen } from '@my/ui'
 import { Settings } from '@tamagui/lucide-icons'
 // import { useMemo } from 'react'
 import { useTranslation } from '@my/locales'
@@ -25,13 +25,17 @@ export default () => {
             <SRIconButton {...settingLink} padding={0} icon={<Settings size={'$1.5'} />} />
           ),
           headerRight: () => (
-            <ButtonText
-              pressStyle={{
-                opacity: 0.6,
-              }}
-            >
-              {isConnected ? t('connected') : t('unconnected')}
-            </ButtonText>
+            <SRConnectIPDialog
+              trigger={
+                <ButtonText
+                  pressStyle={{
+                    opacity: 0.6,
+                  }}
+                >
+                  {isConnected ? t('connected') : t('unconnected')}
+                </ButtonText>
+              }
+            />
           ),
         }}
       />
