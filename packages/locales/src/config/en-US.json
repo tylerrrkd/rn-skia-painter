@@ -19,5 +19,11 @@
   "select language": "select language",
   "confirm": "confirm",
   "cancel": "cancel",
-  "enter IP address on the motherboard": "enter IP address on the motherboard"
+  "enter IP address on the motherboard": "enter IP address on the motherboard",
+  "b/w": "b/w",
+  "grayscale": "grayscale",
+  "outline": "outline",
+  "original color": "original color",
+  "solid": "solid",
+  "hollow": "hollow"
 }

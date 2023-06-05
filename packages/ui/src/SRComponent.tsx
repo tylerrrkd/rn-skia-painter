@@ -47,10 +47,11 @@ export const SRIconButton = styled(SRButton, {
   color: '$primary',
   borderStyle: 'solid',
   borderColor: '$primary',
-  backgroundColor: '$backgroundTransparent',
+  backgroundColor: '',
+  p: '$0',
   pressStyle: {
     opacity: 0.6,
     borderColor: '$primary',
-    backgroundColor: '$backgroundTransparent',
+    backgroundColor: '',
   },
 })

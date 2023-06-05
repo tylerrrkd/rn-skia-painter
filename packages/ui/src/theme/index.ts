@@ -21,7 +21,7 @@ const lightPalette = [
   '#fff', // backgroundTransparent
   '#f9f9f9', // background & backgroundFocus
   'hsl(0, 0%, 97.3%)',
-  '#ddd',
+  tokens.color.inactiveLight,
   'hsl(0, 0%, 94.0%)',
   'hsl(0, 0%, 92.0%)', // border
   'hsl(0, 0%, 89.5%)',

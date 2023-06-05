@@ -19,5 +19,11 @@
   "select language": "选择语言",
   "confirm": "确定",
   "cancel": "取消",
-  "enter IP address on the motherboard": "输入主板上的IP地址"
+  "enter IP address on the motherboard": "输入主板上的IP地址",
+  "b/w": "黑白",
+  "grayscale": "灰度",
+  "outline": "轮廓",
+  "original color": "原彩",
+  "solid": "实心",
+  "hollow": "空心"
 }

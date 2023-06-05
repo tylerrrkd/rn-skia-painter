@@ -25,6 +25,7 @@ export const SRConnectIPDialog: React.FC<GetProps<typeof SRDialog>> = ({ ...prop
             keyboardType="numeric"
             value={IPAddress}
             placeholder={t('enter IP address on the motherboard')}
+            placeholderTextColor={'$gray11'}
             onChange={(event) => setIPAddress(event?.nativeEvent?.text)}
           />
         </XStack>

@@ -131,6 +131,7 @@ export const commonColors = {
   primary: '#F78F21',
   primaryPressBackground: 'rgba(247,143,33,0.6)',
   border: '#989898',
+  inactive: '#ddd',
 }
 
 export const darkColors = {
