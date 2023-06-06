@@ -48,7 +48,7 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }
     fetchInitialLocales()
   }, [])
 
-  const translate: TranslateFunction = useCallback(
+  const translate = useCallback<TranslateFunction>(
     (key) => {
       const translationSet = languageMap.get(currentLanguage.code) ?? {}
       const translatedText = translationSet?.[key] || key

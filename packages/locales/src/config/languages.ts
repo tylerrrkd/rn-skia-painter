@@ -9,8 +9,8 @@ export const languages: Record<LanguageCode, Language> = {
 }
 
 export const locales: Record<LanguageCode, Record<string, string>> = {
-  [LanguageCode.en]: require('./en-US.json'),
-  [LanguageCode.zh]: require('./zh-CN.json'),
+  [LanguageCode.en]: require('./en-US'),
+  [LanguageCode.zh]: require('./zh-CN'),
 }
 
 const languageList = Object.values(languages)

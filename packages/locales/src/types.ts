@@ -1,4 +1,4 @@
-import translations from './config/en-US.json'
+import translations from './config/en-US'
 
 export enum LanguageCode {
   en = 'en',
