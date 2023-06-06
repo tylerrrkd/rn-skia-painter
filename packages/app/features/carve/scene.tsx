@@ -1,6 +1,16 @@
 import React, { cloneElement } from 'react'
 import { useTranslation } from '@my/locales'
-import { GetProps, SRIconButton, Slider, SpaceTokens, Text, XStack, YStack } from '@my/ui'
+import {
+  Checkbox,
+  GetProps,
+  Label,
+  SRIconButton,
+  Slider,
+  SpaceTokens,
+  Text,
+  XStack,
+  YStack,
+} from '@my/ui'
 import {
   Layers,
   Type,
@@ -14,7 +24,48 @@ import {
   Square,
   MenuSquare,
   Undo2,
+  Check,
 } from '@tamagui/lucide-icons'
+
+const statusTextPxSpace: SpaceTokens = '$2'
+const OperationStatus = () => {
+  const { t } = useTranslation()
+
+  return (
+    <XStack
+      px={pxSpace}
+      height={'$3'}
+      alignItems="center"
+      justifyContent="space-between"
+      space="$2"
+    >
+      <Text fontSize="$3" space={statusTextPxSpace}>
+        {t('width')}
+        <Text>100</Text>mm
+        <Text>|</Text>
+        {t('height')}
+        <Text>100</Text>mm
+      </Text>
+      <XStack alignItems="center" space="$1.5">
+        <Checkbox id="scale" defaultChecked={true} borderRadius="100%">
+          <Checkbox.Indicator
+            w="100%"
+            h="100%"
+            alignItems="center"
+            justifyContent="center"
+            backgroundColor={'$primary'}
+            borderRadius="100%"
+          >
+            <Check color="white" />
+          </Checkbox.Indicator>
+        </Checkbox>
+        <Label pt="$2" htmlFor="scale" fontSize="$3">
+          {t('fixed scale')}
+        </Label>
+      </XStack>
+    </XStack>
+  )
+}
 
 const OperationButton: React.FC<GetProps<typeof SRIconButton> & { type?: 's' | 'l' }> = ({
   children,
@@ -71,6 +122,7 @@ export const CarveScene = () => {
 
   return (
     <YStack flex={1}>
+      <OperationStatus />
       <XStack space="$4" justifyContent="center">
         <OperationButton type="s" icon={<MenuSquare />}>
           {t('solid')}

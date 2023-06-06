@@ -30,5 +30,8 @@
   "contrast ratio": "contrast ratio",
   "carve precision": "carve precision",
   "carve speed": "carve speed",
-  "laser power": "laser power"
+  "laser power": "laser power",
+  "width": "width",
+  "height": "height",
+  "fixed scale": "fixed scale"
 }

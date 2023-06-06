@@ -30,5 +30,8 @@
   "contrast ratio": "对比度",
   "carve precision": "雕刻精度",
   "carve speed": "雕刻速度",
-  "laser power": "激光功率"
+  "laser power": "激光功率",
+  "width": "宽度",
+  "height": "高度",
+  "fixed scale": "按比例缩放"
 }
