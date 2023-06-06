@@ -142,7 +142,7 @@ export const CarveScene = () => {
           {t('outline')}
         </OperationButton>
         <OperationButton type="s" icon={<Palette />}>
-          {t('original color')}
+          {t('true tone')}
         </OperationButton>
       </XStack>
       <SliderOperation
