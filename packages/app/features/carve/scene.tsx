@@ -42,7 +42,7 @@ const SliderOperation: React.FC<{
   extra?: React.ReactNode
 }> = ({ name, extra }) => {
   return (
-    <XStack px={pxSpace} alignItems="center" space="$2" justifyContent="center">
+    <XStack px={pxSpace} height={'$2.5'} alignItems="center" space="$2" justifyContent="center">
       <Text>{name}</Text>
       <Text>50%</Text>
       <Slider flex={1} defaultValue={[50]} max={100} step={1}>
@@ -94,13 +94,13 @@ export const CarveScene = () => {
         </OperationButton>
       </XStack>
       <SliderOperation
-        name="画笔大小"
+        name={t('brush size')}
         extra={<SRIconButton icon={<Undo2 color="black" size="$1.5" />} />}
       />
-      <SliderOperation name="对比度" />
-      <SliderOperation name="雕刻精度" />
-      <SliderOperation name="雕刻速度" />
-      <SliderOperation name="激光功率" />
+      <SliderOperation name={t('contrast ratio')} />
+      <SliderOperation name={t('carve precision')} />
+      <SliderOperation name={t('carve speed')} />
+      <SliderOperation name={t('laser power')} />
       <XStack px={pxSpace} justifyContent="space-between">
         <OperationButton icon={<Layers />}>{t('material')}</OperationButton>
         <OperationButton icon={<Type />}>{t('text')}</OperationButton>

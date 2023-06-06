@@ -25,5 +25,10 @@
   "outline": "轮廓",
   "original color": "原彩",
   "solid": "实心",
-  "hollow": "空心"
+  "hollow": "空心",
+  "brush size": "画笔大小",
+  "contrast ratio": "对比度",
+  "carve precision": "雕刻精度",
+  "carve speed": "雕刻速度",
+  "laser power": "激光功率"
 }

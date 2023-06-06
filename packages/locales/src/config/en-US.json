@@ -25,5 +25,10 @@
   "outline": "outline",
   "original color": "original color",
   "solid": "solid",
-  "hollow": "hollow"
+  "hollow": "hollow",
+  "brush size": "brush size",
+  "contrast ratio": "contrast ratio",
+  "carve precision": "carve precision",
+  "carve speed": "carve speed",
+  "laser power": "laser power"
 }
