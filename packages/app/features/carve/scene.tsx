@@ -28,7 +28,7 @@ import {
 } from '@tamagui/lucide-icons'
 
 const statusTextPxSpace: SpaceTokens = '$2'
-const OperationStatus = () => {
+const ActionStatus = () => {
   const { t } = useTranslation()
 
   return (
@@ -67,7 +67,7 @@ const OperationStatus = () => {
   )
 }
 
-const OperationButton: React.FC<
+const ActionButton: React.FC<
   GetProps<typeof SRIconButton> & { type?: 's' | 'l'; active?: boolean }
 > = ({ children, icon, type = 'l', active }) => {
   return (
@@ -86,7 +86,7 @@ const OperationButton: React.FC<
   )
 }
 
-const SliderOperation: React.FC<{
+const ActionSlider: React.FC<{
   name: string
   extra?: React.ReactNode
 }> = ({ name, extra }) => {
@@ -120,43 +120,45 @@ export const CarveScene = () => {
 
   return (
     <YStack flex={1}>
-      <OperationStatus />
+      <ActionStatus />
       <XStack space="$4" justifyContent="center">
-        <OperationButton type="s" icon={<MenuSquare />}>
+        <ActionButton active type="s" icon={<MenuSquare />}>
           {t('solid')}
-        </OperationButton>
-        <OperationButton type="s" icon={<Square />}>
+        </ActionButton>
+        <ActionButton type="s" icon={<Square />}>
           {t('hollow')}
-        </OperationButton>
+        </ActionButton>
       </XStack>
       <XStack space="$4" justifyContent="center">
-        <OperationButton type="s" icon={<Contrast />}>
+        <ActionButton type="s" icon={<Contrast />}>
           {t('b/w')}
-        </OperationButton>
-        <OperationButton type="s" icon={<Droplet />}>
+        </ActionButton>
+        <ActionButton active type="s" icon={<Droplet />}>
           {t('grayscale')}
-        </OperationButton>
-        <OperationButton type="s" icon={<Lasso />}>
+        </ActionButton>
+        <ActionButton type="s" icon={<Lasso />}>
           {t('outline')}
-        </OperationButton>
-        <OperationButton type="s" icon={<Palette />}>
+        </ActionButton>
+        <ActionButton type="s" icon={<Palette />}>
           {t('true tone')}
-        </OperationButton>
+        </ActionButton>
       </XStack>
-      <SliderOperation
+      <ActionSlider
         name={t('brush size')}
         extra={<SRIconButton icon={<Undo2 color="black" size="$1.5" />} />}
       />
-      <SliderOperation name={t('contrast ratio')} />
-      <SliderOperation name={t('carve precision')} />
-      <SliderOperation name={t('carve speed')} />
-      <SliderOperation name={t('laser power')} />
+      <ActionSlider name={t('contrast ratio')} />
+      <ActionSlider name={t('carve precision')} />
+      <ActionSlider name={t('carve speed')} />
+      <ActionSlider name={t('laser power')} />
       <XStack px={pxSpace} justifyContent="space-between">
-        <OperationButton icon={<Layers />}>{t('material')}</OperationButton>
-        <OperationButton icon={<Type />}>{t('text')}</OperationButton>
-        <OperationButton icon={<Brush />}>{t('brush')}</OperationButton>
-        <OperationButton icon={<Image />}>{t('album')}</OperationButton>
-        <OperationButton icon={<View />}>{t('preview')}</OperationButton>
+        <ActionButton icon={<Layers />}>{t('material')}</ActionButton>
+        <ActionButton icon={<Type />}>{t('text')}</ActionButton>
+        <ActionButton icon={<Brush />}>{t('brush')}</ActionButton>
+        <ActionButton active icon={<Image />}>
+          {t('album')}
+        </ActionButton>
+        <ActionButton icon={<View />}>{t('preview')}</ActionButton>
       </XStack>
     </YStack>
   )
