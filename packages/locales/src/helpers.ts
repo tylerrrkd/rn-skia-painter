@@ -19,7 +19,7 @@ export const getLanguageCodeFromStorageOrDevice = async (): Promise<LanguageCode
   try {
     const codeFromStorage = (await AsyncStorage?.getItem?.(KEY_LOCALES)) as LanguageCode
 
-    return codeFromStorage || EN.code
+    return codeFromStorage
   } catch {
     return EN.code
   }
