@@ -115,6 +115,17 @@ enum Operation {
   preview,
 }
 
+/**
+ * @description
+ * 状态区
+ * 画布
+ * 辅助动作区
+ *  - 路径(Path Effect)
+ *  - 着色器(Blend Shader)
+ * 辅助动作区
+ *  - 画笔大小(stroke)
+ *  - 对比度(contrast)
+ */
 export const CarveScene = () => {
   const { t } = useTranslation()
 
