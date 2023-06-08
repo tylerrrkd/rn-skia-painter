@@ -13,6 +13,8 @@ module.exports = function (api) {
             app: '../../packages/app',
             '@my/ui': '../../packages/ui',
             '@my/locales': '../../packages/locales',
+            '@my/stores': '../../packages/stores',
+            '@': './',
           },
           extensions: ['.js', '.jsx', '.tsx', '.ios.js', '.android.js'],
         },
