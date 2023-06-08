@@ -1,6 +1,7 @@
 import { X } from '@tamagui/lucide-icons'
 import { useState } from 'react'
-import { Button, Dialog, DialogProps, Unspaced, XStack } from 'tamagui'
+import { GestureResponderEvent } from 'react-native'
+import { Button, Dialog, DialogProps, TamaguiComponentPropsBase, Unspaced, XStack } from 'tamagui'
 import { useTranslation } from '@my/locales'
 import { SRButton } from '../SRComponent'
 
@@ -11,9 +12,21 @@ export const SRDialog: React.FC<
     content?: React.ReactNode
     showCloseButton?: boolean
     confirmText?: string
+    onConfirm?: (event: GestureResponderEvent) => Promise<boolean>
     cancelText?: string
+    onCancel?: TamaguiComponentPropsBase['onPress']
   }
-> = ({ tittle, trigger, content, showCloseButton, confirmText, cancelText, ...props }) => {
+> = ({
+  tittle,
+  trigger,
+  content,
+  showCloseButton,
+  confirmText,
+  cancelText,
+  onConfirm,
+  onCancel,
+  ...props
+}) => {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
 
@@ -53,11 +66,17 @@ export const SRDialog: React.FC<
           {content}
           <XStack alignItems="center" justifyContent="center" space={'$2'}>
             <Dialog.Close asChild flex={1}>
-              <Button>{cancelText ? cancelText : t('cancel')}</Button>
+              <Button onPress={onCancel}>{cancelText ? cancelText : t('cancel')}</Button>
             </Dialog.Close>
-            <Dialog.Close asChild flex={1}>
-              <SRButton>{confirmText ? confirmText : t('confirm')}</SRButton>
-            </Dialog.Close>
+            <SRButton
+              flex={1}
+              onPress={async (event) => {
+                const result = await onConfirm?.(event)
+                result && setOpen(false)
+              }}
+            >
+              {confirmText ? confirmText : t('confirm')}
+            </SRButton>
           </XStack>
           {showCloseButton && (
             <Unspaced>
