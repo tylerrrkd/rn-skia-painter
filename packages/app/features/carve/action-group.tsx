@@ -1,9 +1,10 @@
 import React, { cloneElement } from 'react'
 import { GetProps, SRIconButton, XStack, XStackProps } from '@my/ui'
+import useMergedState from 'rc-util/lib/hooks/useMergedState'
 
 export const ActionButton: React.FC<
   GetProps<typeof SRIconButton> & { type?: 's' | 'l'; active?: boolean }
-> = ({ children, icon, type = 'l', active }) => {
+> = ({ children, icon, type = 'l', active, ...props }) => {
   return (
     <SRIconButton
       color={'black'}
@@ -14,21 +15,31 @@ export const ActionButton: React.FC<
         size: type === 'l' ? '$3' : '$2',
       })}
       flexDirection="column"
+      {...props}
     >
       {children}
     </SRIconButton>
   )
 }
 
-export type Action<T = string> = Exclude<GetProps<typeof ActionButton>, 'active'> & { key?: T }
+export type Action<T = string> = Omit<GetProps<typeof ActionButton>, 'active'> & { key: T }
 
-export const ActionGroup: React.FC<
-  {
-    actions: Action[]
-    current?: Action
-    onChange: (action: Action) => void
-  } & XStackProps
-> = ({ actions, current, onChange, ...props }) => {
+export const ActionGroup = <T,>({
+  actions,
+  value,
+  defaultValue,
+  onChange,
+  ...props
+}: {
+  actions: Action<T>[]
+  value?: Action<T>
+  defaultValue?: Action<T>
+  onChange?: (action: Action<T>) => void
+} & XStackProps) => {
+  const [mergedValue, setValue] = useMergedState(defaultValue, {
+    value,
+  })
+
   return (
     <XStack justifyContent="center" {...props}>
       {actions?.map?.(({ children, ...action }) => (
@@ -37,9 +48,10 @@ export const ActionGroup: React.FC<
             ...action,
             onPress: (event) => {
               action?.onPress?.(event)
-              onChange(action)
+              setValue(action)
+              onChange?.(action)
             },
-            active: action.key === current?.key,
+            active: action.key === mergedValue?.key,
           }}
         >
           {children}
