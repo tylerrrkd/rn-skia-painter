@@ -59,6 +59,7 @@ export const ActionGroup = <T,>({
             type,
             ...action,
             onPress: (event) => {
+              if (action.key === mergedValue?.key) return
               action?.onPress?.(event)
               setValue(action)
               onChange?.(action)
