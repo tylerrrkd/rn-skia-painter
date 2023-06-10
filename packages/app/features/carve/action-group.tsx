@@ -2,9 +2,18 @@ import React, { cloneElement } from 'react'
 import { GetProps, SRIconButton, XStack, XStackProps } from '@my/ui'
 import useMergedState from 'rc-util/lib/hooks/useMergedState'
 
-export const ActionButton: React.FC<
-  GetProps<typeof SRIconButton> & { type?: 's' | 'l'; active?: boolean }
-> = ({ children, icon, type = 'l', active, ...props }) => {
+export type ActionButtonProps = GetProps<typeof SRIconButton> & {
+  type?: 's' | 'l'
+  active?: boolean
+}
+
+export const ActionButton: React.FC<ActionButtonProps> = ({
+  children,
+  icon,
+  type = 'l',
+  active,
+  ...props
+}) => {
   return (
     <SRIconButton
       color={'black'}
@@ -29,12 +38,14 @@ export const ActionGroup = <T,>({
   value,
   defaultValue,
   onChange,
+  type = 'l',
   ...props
 }: {
   actions: Action<T>[]
   value?: Action<T>
   defaultValue?: Action<T>
   onChange?: (action: Action<T>) => void
+  type?: ActionButtonProps['type']
 } & XStackProps) => {
   const [mergedValue, setValue] = useMergedState(defaultValue, {
     value,
@@ -45,6 +56,7 @@ export const ActionGroup = <T,>({
       {actions?.map?.(({ children, ...action }) => (
         <ActionButton
           {...{
+            type,
             ...action,
             onPress: (event) => {
               action?.onPress?.(event)
