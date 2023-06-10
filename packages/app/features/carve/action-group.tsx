@@ -1,6 +1,5 @@
 import React, { cloneElement } from 'react'
 import { GetProps, SRIconButton, XStack, XStackProps } from '@my/ui'
-import useMergedState from 'rc-util/lib/hooks/useMergedState'
 
 export type ActionButtonProps = GetProps<typeof SRIconButton> & {
   type?: 's' | 'l'
@@ -36,21 +35,15 @@ export type Action<T = string> = Omit<GetProps<typeof ActionButton>, 'active'> &
 export const ActionGroup = <T,>({
   actions,
   value,
-  defaultValue,
   onChange,
   type = 'l',
   ...props
 }: {
   actions: Action<T>[]
   value?: Action<T>
-  defaultValue?: Action<T>
   onChange?: (action: Action<T>) => void
   type?: ActionButtonProps['type']
 } & XStackProps) => {
-  const [mergedValue, setValue] = useMergedState(defaultValue, {
-    value,
-  })
-
   return (
     <XStack justifyContent="center" {...props}>
       {actions?.map?.(({ children, ...action }) => (
@@ -59,12 +52,11 @@ export const ActionGroup = <T,>({
             type,
             ...action,
             onPress: (event) => {
-              if (action.key === mergedValue?.key) return
+              if (action.key === value?.key) return
               action?.onPress?.(event)
-              setValue(action)
               onChange?.(action)
             },
-            active: action.key === mergedValue?.key,
+            active: action.key === value?.key,
           }}
         >
           {children}
