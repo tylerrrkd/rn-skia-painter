@@ -68,18 +68,20 @@ const ActionStatus = () => {
 }
 
 const ActionButton: React.FC<
-  GetProps<typeof SRIconButton> & { type?: 's' | 'l'; active?: boolean }
-> = ({ children, icon, type = 'l', active }) => {
+  GetProps<typeof SRIconButton> & { type?: 's' | 'l' /* active?: boolean */ }
+> = ({ children, icon, type = 'l', /* active, */ ...props }) => {
   return (
     <SRIconButton
       color={'black'}
       height={'$8'}
       fontSize={type === 'l' ? '$4' : '$3'}
       icon={cloneElement(icon as JSX.Element, {
-        color: active ? '$primary' : '$inactive',
+        // color: active ? '$primary' : '$inactive',
+        color: '$primary',
         size: type === 'l' ? '$3' : '$2',
       })}
       flexDirection="column"
+      {...props}
     >
       {children}
     </SRIconButton>
