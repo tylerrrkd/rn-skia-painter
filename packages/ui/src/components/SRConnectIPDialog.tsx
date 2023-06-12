@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { GetProps, Input, XStack } from 'tamagui'
 import { useTranslation } from '@my/locales'
 import { useSettingStore } from '@my/stores'
@@ -10,8 +10,12 @@ export const SRConnectIPDialog: React.FC<GetProps<typeof SRDialog>> = ({ ...prop
     state.IPAddress,
     state.setIPAddress,
   ])
-  const [typingIPAddress, setTypingIPAddress] = useState(IPAddress)
+  const [typingIPAddress, setTypingIPAddress] = useState<string>()
   const [isError, setIsError] = useState(false)
+
+  useEffect(() => {
+    IPAddress && setTypingIPAddress(IPAddress)
+  }, [IPAddress])
 
   const onConfirm = useCallback(async () => {
     if (!typingIPAddress) {
