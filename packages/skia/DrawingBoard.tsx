@@ -1,6 +1,14 @@
 import { useState, forwardRef, useImperativeHandle } from 'react'
 import { LayoutChangeEvent } from 'react-native'
-import { Skia, Canvas, CanvasProps, Group, Image, useImage } from '@shopify/react-native-skia'
+import {
+  Skia,
+  Canvas,
+  CanvasProps,
+  Group,
+  Image,
+  BackdropFilter,
+  ColorMatrix,
+} from '@shopify/react-native-skia'
 import { MediaTypeOptions, launchImageLibraryAsync } from 'expo-image-picker'
 import { useDrawingBoardStore } from '@my/stores'
 import { useToastController } from '@tamagui/toast'
@@ -9,6 +17,13 @@ export type DrawingBoardProps = Omit<CanvasProps, 'children'>
 export interface DrawingBoardRef {
   pickImage: () => Promise<void>
 }
+
+// https://kazzkiq.github.io/svg-color-filter/
+const BLACK_AND_WHITE = [0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0]
+const GRAY_SCALE = [
+  0.3333, 0.3333, 0.3333, 0, 0, 0.3333, 0.3333, 0.3333, 0, 0, 0.3333, 0.3333, 0.3333, 0, 0, 0, 0, 0,
+  1, 0,
+]
 
 export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
   ({ style, ...props }, ref) => {
@@ -59,10 +74,22 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
         ]}
         {...props}
       >
-        <Group>
-          {images.map((image) => (
-            <Image image={image} fit="contain" x={0} y={0} width={256} height={256} />
+        <Group origin={{ x: height / 2, y: height / 2 }}>
+          {images.map((image, index) => (
+            <Image
+              key={index}
+              image={image}
+              fit="contain"
+              x={0}
+              y={0}
+              width={height}
+              height={height}
+            />
           ))}
+          <BackdropFilter
+            clip={{ x: 0, y: 0, width: height, height: height }}
+            filter={<ColorMatrix matrix={BLACK_AND_WHITE} />}
+          />
         </Group>
       </Canvas>
     )
