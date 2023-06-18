@@ -8,6 +8,7 @@
   ],
   "dependencies": {
     "@my/locales": "*",
+    "@my/skia": "*",
     "@my/stores": "*",
     "@my/ui": "*",
     "@tamagui/animations-react-native": "latest",

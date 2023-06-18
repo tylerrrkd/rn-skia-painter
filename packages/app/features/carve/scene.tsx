@@ -1,10 +1,11 @@
-import React, { cloneElement } from 'react'
+import React, { cloneElement, useRef } from 'react'
 import { useTranslation } from '@my/locales'
 import {
   Checkbox,
   GetProps,
   Label,
   SRIconButton,
+  ScrollView,
   Slider,
   SpaceTokens,
   Text,
@@ -26,6 +27,7 @@ import {
   Undo2,
   Check,
 } from '@tamagui/lucide-icons'
+import { DrawingBoard, DrawingBoardRef } from '@my/skia'
 
 const statusTextPxSpace: SpaceTokens = '$2'
 const ActionStatus = () => {
@@ -130,49 +132,53 @@ enum Operation {
  */
 export const CarveScene = () => {
   const { t } = useTranslation()
+  const drawingBoardRef = useRef<DrawingBoardRef>(null)
 
   return (
     <YStack flex={1}>
-      <ActionStatus />
-      <XStack space="$4" justifyContent="center">
-        <ActionButton active type="s" icon={<MenuSquare />}>
-          {t('solid')}
-        </ActionButton>
-        <ActionButton type="s" icon={<Square />}>
-          {t('hollow')}
-        </ActionButton>
-      </XStack>
-      <XStack space="$4" justifyContent="center">
-        <ActionButton type="s" icon={<Contrast />}>
-          {t('b/w')}
-        </ActionButton>
-        <ActionButton active type="s" icon={<Droplet />}>
-          {t('grayscale')}
-        </ActionButton>
-        <ActionButton type="s" icon={<Lasso />}>
-          {t('outline')}
-        </ActionButton>
-        <ActionButton type="s" icon={<Palette />}>
-          {t('true tone')}
-        </ActionButton>
-      </XStack>
-      <ActionSlider
-        name={t('brush size')}
-        extra={<SRIconButton icon={<Undo2 color="black" size="$1.5" />} />}
-      />
-      <ActionSlider name={t('contrast ratio')} />
-      <ActionSlider name={t('carve precision')} />
-      <ActionSlider name={t('carve speed')} />
-      <ActionSlider name={t('laser power')} />
-      <XStack px={pxSpace} justifyContent="space-between">
-        <ActionButton icon={<Layers />}>{t('material')}</ActionButton>
-        <ActionButton icon={<Type />}>{t('text')}</ActionButton>
-        <ActionButton icon={<Brush />}>{t('brush')}</ActionButton>
-        <ActionButton active icon={<Image />}>
-          {t('album')}
-        </ActionButton>
-        <ActionButton icon={<View />}>{t('preview')}</ActionButton>
-      </XStack>
+      <ScrollView>
+        <ActionStatus />
+        <DrawingBoard ref={drawingBoardRef} />
+        <XStack space="$4" justifyContent="center">
+          <ActionButton active type="s" icon={<MenuSquare />}>
+            {t('solid')}
+          </ActionButton>
+          <ActionButton type="s" icon={<Square />}>
+            {t('hollow')}
+          </ActionButton>
+        </XStack>
+        <XStack space="$4" justifyContent="center">
+          <ActionButton type="s" icon={<Contrast />}>
+            {t('b/w')}
+          </ActionButton>
+          <ActionButton active type="s" icon={<Droplet />}>
+            {t('grayscale')}
+          </ActionButton>
+          <ActionButton type="s" icon={<Lasso />}>
+            {t('outline')}
+          </ActionButton>
+          <ActionButton type="s" icon={<Palette />}>
+            {t('true tone')}
+          </ActionButton>
+        </XStack>
+        <ActionSlider
+          name={t('brush size')}
+          extra={<SRIconButton icon={<Undo2 color="black" size="$1.5" />} />}
+        />
+        <ActionSlider name={t('contrast ratio')} />
+        <ActionSlider name={t('carve precision')} />
+        <ActionSlider name={t('carve speed')} />
+        <ActionSlider name={t('laser power')} />
+        <XStack px={pxSpace} justifyContent="space-between">
+          <ActionButton icon={<Layers />}>{t('material')}</ActionButton>
+          <ActionButton icon={<Type />}>{t('text')}</ActionButton>
+          <ActionButton icon={<Brush />}>{t('brush')}</ActionButton>
+          <ActionButton onPress={() => drawingBoardRef?.current?.pickImage?.()} active icon={<Image />}>
+            {t('album')}
+          </ActionButton>
+          <ActionButton icon={<View />}>{t('preview')}</ActionButton>
+        </XStack>
+      </ScrollView>
     </YStack>
   )
 }

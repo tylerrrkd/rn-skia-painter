@@ -27,7 +27,7 @@ module.exports = function (api) {
             [
               '@tamagui/babel-plugin',
               {
-                components: ['@my/ui', 'tamagui', '@my/locales'],
+                components: ['@my/ui', 'tamagui', '@my/locales', '@my/stores', '@my/skia'],
                 config: './tamagui.config.ts',
               },
             ],
