@@ -6,7 +6,8 @@
       "app/*": ["./packages/app/*"],
       "@my/ui/*": ["./packages/ui/*"],
       "@my/locales/*": ["./packages/locales/*"],
-      "@my/stores/*": ["./packages/stores/*"]
+      "@my/stores/*": ["./packages/stores/*"],
+      "@my/skia/*": ["./packages/skia/*"]
     }
   },
   "extends": "expo/tsconfig.base"

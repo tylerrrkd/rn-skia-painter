@@ -1,5 +1,5 @@
 {
-  "name": "@my/stores",
+  "name": "@my/skia",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -12,6 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "@shopify/react-native-skia": "^0.1.193",
-    "zustand": "^4.3.8"
+    "expo-image-picker": "~14.1.1"
   }
 }

@@ -3192,6 +3192,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@my/skia@*, @my/skia@workspace:packages/skia":
+  version: 0.0.0-use.local
+  resolution: "@my/skia@workspace:packages/skia"
+  dependencies:
+    "@shopify/react-native-skia": ^0.1.193
+    expo-image-picker: ^14.1.1
+  languageName: unknown
+  linkType: soft
+
 "@my/stores@*, @my/stores@workspace:packages/stores":
   version: 0.0.0-use.local
   resolution: "@my/stores@workspace:packages/stores"
@@ -6173,6 +6182,7 @@ __metadata:
   resolution: "app@workspace:packages/app"
   dependencies:
     "@my/locales": "*"
+    "@my/skia": "*"
     "@my/stores": "*"
     "@my/ui": "*"
     "@tamagui/animations-react-native": latest
@@ -9728,6 +9738,7 @@ __metadata:
     "@babel/runtime": ^7.18.9
     "@expo/metro-config": ^0.3.21
     "@my/locales": "*"
+    "@my/skia": "*"
     "@my/stores": "*"
     "@my/ui": "*"
     "@react-navigation/native": ^6.1.6
@@ -9743,6 +9754,7 @@ __metadata:
     expo-dev-client: ^2.1.5
     expo-font: ^11.1.1
     expo-image: ^1.0.0
+    expo-image-picker: ~14.1.1
     expo-linear-gradient: ^12.1.2
     expo-linking: ^4.0.1
     expo-localization: ~14.1.1
@@ -9889,6 +9901,46 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 01648dad7384b04c8eaee22c4b86653cc31230e5f3523bf2082924ccc659f61b031900c55f1f08befaaf1bd1616eecb05ae9767eb111ed9151dd619374581930
+  languageName: node
+  linkType: hard
+
+"expo-image-loader@npm:~4.1.0":
+  version: 4.1.1
+  resolution: "expo-image-loader@npm:4.1.1"
+  peerDependencies:
+    expo: "*"
+  checksum: 6ea7d49148d9126a79f00b1e9a2e648884d208daf8ac54c663eb941a7524d229aa907d6d45704598168c7d1efcb891bdc0bd91f077a53d3a270b18c269d43d99
+  languageName: node
+  linkType: hard
+
+"expo-image-loader@npm:~4.3.0":
+  version: 4.3.0
+  resolution: "expo-image-loader@npm:4.3.0"
+  peerDependencies:
+    expo: "*"
+  checksum: 0440ac80a7b2331cdfd0db88aac0ba2fe61689e6347e2c6bedba6bf3220b95410c724ac9004252486870b582fc36d47d4bff008bba7052dcee2830256950974f
+  languageName: node
+  linkType: hard
+
+"expo-image-picker@npm:^14.1.1":
+  version: 14.3.0
+  resolution: "expo-image-picker@npm:14.3.0"
+  dependencies:
+    expo-image-loader: ~4.3.0
+  peerDependencies:
+    expo: "*"
+  checksum: d1246f3fee8071841ee8fa9e813d72bfc10afa9cf60423660b5f115264a89f32a36abe3d5ba4c813a9f596e619f4d48d6cae7a3b0b49c05a7d55184ad1e9476b
+  languageName: node
+  linkType: hard
+
+"expo-image-picker@npm:~14.1.1":
+  version: 14.1.1
+  resolution: "expo-image-picker@npm:14.1.1"
+  dependencies:
+    expo-image-loader: ~4.1.0
+  peerDependencies:
+    expo: "*"
+  checksum: 6e6e8a9c9bd32af9a4b09f4ff271182bb00c4abc733348911a46a0515c3ea1d0f8263b18d2b18b0d394ad44f3c8cc5fd8066d3748fade109b04c7031fbec9b07
   languageName: node
   linkType: hard
 
