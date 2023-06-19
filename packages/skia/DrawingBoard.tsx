@@ -19,10 +19,25 @@ export interface DrawingBoardRef {
 }
 
 // https://kazzkiq.github.io/svg-color-filter/
-const BLACK_AND_WHITE = [0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0]
+const BLACK_AND_WHITE = [
+  // r-rbgam
+  0, 1, 0, 0, 0,
+  // g-rbgam
+  0, 1, 0, 0, 0,
+  // b-rbgam
+  0, 1, 0, 0, 0,
+  // a-rbgam
+  0, 0, 0, 1, 0,
+]
 const GRAY_SCALE = [
-  0.3333, 0.3333, 0.3333, 0, 0, 0.3333, 0.3333, 0.3333, 0, 0, 0.3333, 0.3333, 0.3333, 0, 0, 0, 0, 0,
-  1, 0,
+  // r-rbgam
+  1, 0, 0, 0, 0,
+  // g-rbgam
+  1, 0, 0, 0, 0,
+  // b-rbgam
+  1, 0, 0, 0, 0,
+  // a-rbgam
+  0, 0, 0, 1, 0,
 ]
 
 export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
