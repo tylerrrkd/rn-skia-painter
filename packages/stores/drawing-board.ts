@@ -1,6 +1,10 @@
 import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
-import type { SkImage } from "@shopify/react-native-skia"
+import type { ImageProps, SkiaProps } from '@shopify/react-native-skia'
+
+export interface ImageLayer {
+  image: SkiaProps<ImageProps>
+}
 
 export const useDrawingBoardStore = create(
   combine(
@@ -8,11 +12,11 @@ export const useDrawingBoardStore = create(
       /**
        * 相册里导入的图片
        */
-      images: [] as SkImage[],
+      imageLayers: [] as ImageLayer[],
     },
     (set, get) => ({
-      addImage: (image: SkImage) => {
-        set({ images: [...get().images, image] })
+      addImageLayer: (imageLayer: ImageLayer) => {
+        set({ imageLayers: [...get().imageLayers, imageLayer] })
       },
     })
   )

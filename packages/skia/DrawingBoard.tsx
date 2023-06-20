@@ -1,14 +1,6 @@
 import { useState, forwardRef, useImperativeHandle } from 'react'
 import { LayoutChangeEvent } from 'react-native'
-import {
-  Skia,
-  Canvas,
-  CanvasProps,
-  Group,
-  Image,
-  BackdropFilter,
-  ColorMatrix,
-} from '@shopify/react-native-skia'
+import { Skia, Canvas, CanvasProps, Image, ColorMatrix } from '@shopify/react-native-skia'
 import { MediaTypeOptions, launchImageLibraryAsync } from 'expo-image-picker'
 import { useDrawingBoardStore } from '@my/stores'
 import { useToastController } from '@tamagui/toast'
@@ -42,8 +34,8 @@ const GRAY_SCALE = [
 
 export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
   ({ style, ...props }, ref) => {
-    const images = useDrawingBoardStore((state) => state.images)
-    const addImage = useDrawingBoardStore((state) => state.addImage)
+    const imageLayers = useDrawingBoardStore((state) => state.imageLayers)
+    const addImageLayer = useDrawingBoardStore((state) => state.addImageLayer)
     const Toast = useToastController()
     const [height, setHeight] = useState(0)
 
@@ -64,7 +56,20 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
       if (!result.canceled && asset) {
         const assetData = await Skia.Data.fromURI(asset.uri)
         const image = Skia.Image.MakeImageFromEncoded(assetData)
-        image && addImage(image)
+        image &&
+          addImageLayer({
+            image: {
+              image,
+              fit: 'contain',
+              width: height,
+              height,
+              children: (
+                <>
+                  <ColorMatrix matrix={BLACK_AND_WHITE} />
+                </>
+              ),
+            },
+          })
       } else {
         Toast.show('未选择图片')
       }
@@ -89,23 +94,9 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
         ]}
         {...props}
       >
-        <Group origin={{ x: height / 2, y: height / 2 }}>
-          {images.map((image, index) => (
-            <Image
-              key={index}
-              image={image}
-              fit="contain"
-              x={0}
-              y={0}
-              width={height}
-              height={height}
-            />
-          ))}
-          <BackdropFilter
-            clip={{ x: 0, y: 0, width: height, height: height }}
-            filter={<ColorMatrix matrix={BLACK_AND_WHITE} />}
-          />
-        </Group>
+        {imageLayers.map(({ image }, index) => (
+          <Image key={index} {...image} />
+        ))}
       </Canvas>
     )
   }
