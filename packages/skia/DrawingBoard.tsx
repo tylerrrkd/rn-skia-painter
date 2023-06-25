@@ -1,9 +1,10 @@
 import { useState, forwardRef, useImperativeHandle } from 'react'
 import { LayoutChangeEvent } from 'react-native'
-import { Skia, Canvas, CanvasProps, Image, ColorMatrix } from '@shopify/react-native-skia'
+import { Skia, Canvas, CanvasProps, Image } from '@shopify/react-native-skia'
 import { MediaTypeOptions, launchImageLibraryAsync } from 'expo-image-picker'
 import { useDrawingBoardStore } from '@my/stores'
 import { useToastController } from '@tamagui/toast'
+import ImageLayer from './ImageLayer'
 
 export type DrawingBoardProps = Omit<CanvasProps, 'children'>
 export interface DrawingBoardRef {
@@ -63,11 +64,9 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
               fit: 'contain',
               width: height,
               height,
-              children: (
-                <>
-                  <ColorMatrix matrix={BLACK_AND_WHITE} />
-                </>
-              ),
+              colorMatrixProps: {
+                matrix: BLACK_AND_WHITE,
+              },
             },
           })
       } else {
@@ -95,7 +94,7 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
         {...props}
       >
         {imageLayers.map(({ image }, index) => (
-          <Image key={index} {...image} />
+          <ImageLayer key={index} {...image} />
         ))}
       </Canvas>
     )

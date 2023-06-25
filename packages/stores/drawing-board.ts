@@ -1,9 +1,9 @@
 import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
-import type { ImageProps, SkiaProps } from '@shopify/react-native-skia'
+import type { ImageLayerProps } from '@my/skia/ImageLayer'
 
 export interface ImageLayer {
-  image: SkiaProps<ImageProps>
+  image: ImageLayerProps
 }
 
 export const useDrawingBoardStore = create(
