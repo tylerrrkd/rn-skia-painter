@@ -1,6 +1,6 @@
 import { useState, forwardRef, useImperativeHandle } from 'react'
 import { LayoutChangeEvent } from 'react-native'
-import { Skia, Canvas, CanvasProps, Image } from '@shopify/react-native-skia'
+import { Skia, Canvas, CanvasProps } from '@shopify/react-native-skia'
 import { MediaTypeOptions, launchImageLibraryAsync } from 'expo-image-picker'
 import { useDrawingBoardStore } from '@my/stores'
 import { useToastController } from '@tamagui/toast'
@@ -59,14 +59,12 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
         const image = Skia.Image.MakeImageFromEncoded(assetData)
         image &&
           addImageLayer({
-            image: {
-              image,
-              fit: 'contain',
-              width: height,
-              height,
-              colorMatrixProps: {
-                matrix: BLACK_AND_WHITE,
-              },
+            image,
+            fit: 'contain',
+            width: height,
+            height,
+            colorMatrixProps: {
+              matrix: BLACK_AND_WHITE,
             },
           })
       } else {
@@ -93,8 +91,8 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
         ]}
         {...props}
       >
-        {imageLayers.map(({ image }, index) => (
-          <ImageLayer key={index} {...image} />
+        {imageLayers.map((props, index) => (
+          <ImageLayer key={index} {...props} />
         ))}
       </Canvas>
     )
