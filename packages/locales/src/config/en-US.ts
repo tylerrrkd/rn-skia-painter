@@ -5,6 +5,7 @@ export default {
   'file list': 'file list',
   'language could not found': 'language could not found',
   'carve scene': 'carve scene',
+  'carve setting': 'carve setting',
   material: 'material',
   text: 'text',
   brush: 'brush',

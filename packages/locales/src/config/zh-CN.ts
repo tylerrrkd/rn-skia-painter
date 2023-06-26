@@ -1,10 +1,13 @@
-export default {
+import type { TranslationKey } from '../types'
+
+const ZH: Record<TranslationKey, string> = {
   connected: '已连接',
   unconnected: '未连接',
   start: '开始',
   'file list': '文件列表',
   'language could not found': '找不到该语言',
   'carve scene': '雕刻场景',
+  'carve setting': '雕刻设置',
   material: '素材',
   text: '文字',
   brush: '画笔',
@@ -35,3 +38,5 @@ export default {
   height: '高度',
   'fixed scale': '按比例缩放',
 }
+
+export default ZH
