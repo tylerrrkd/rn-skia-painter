@@ -1,37 +1,12 @@
-import React, { cloneElement } from 'react'
-import { GetProps, SRIconButton, XStack, XStackProps } from '@my/ui'
+import React from 'react'
+import { XStack, XStackProps } from '@my/ui'
+import { ActionButton, ActionButtonProps } from './actions'
 
-export type ActionButtonProps = GetProps<typeof SRIconButton> & {
-  type?: 's' | 'l'
-  active?: boolean
-}
+export type Action<T = string> = Omit<ActionButtonProps, 'active'> & { key: T }
 
-export const ActionButton: React.FC<ActionButtonProps> = ({
-  children,
-  icon,
-  type = 'l',
-  active,
-  ...props
-}) => {
-  return (
-    <SRIconButton
-      color={'black'}
-      height={'$8'}
-      fontSize={type === 'l' ? '$4' : '$3'}
-      icon={cloneElement(icon as JSX.Element, {
-        color: active ? '$primary' : '$inactive',
-        size: type === 'l' ? '$3' : '$2',
-      })}
-      flexDirection="column"
-      {...props}
-    >
-      {children}
-    </SRIconButton>
-  )
-}
-
-export type Action<T = string> = Omit<GetProps<typeof ActionButton>, 'active'> & { key: T }
-
+/**
+ * @description 区分按钮状态组件
+ */
 export const ActionGroup = <T,>({
   actions,
   value,
