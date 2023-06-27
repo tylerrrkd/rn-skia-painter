@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useTranslation } from '@my/locales'
-import { ScrollView, SpaceTokens, XStack, YStack } from '@my/ui'
+import { SpaceTokens, XStack, YStack } from '@my/ui'
 import { Layers, Type, Brush, Image, View } from '@tamagui/lucide-icons'
 import { DrawingBoard, DrawingBoardRef } from '@my/skia'
 import { ActionButton, ActionStatus } from './actions'
@@ -24,6 +24,10 @@ const pxSpace: SpaceTokens = '$3.5'
  * 每个图层消费对应的状态
  * 根据图层下发的配置展示各个区域
  * 层级关系 actions -> operation -> carve scene
+ * @description 画布大小
+ * TODO: 此处不能用滚动 否则绘图体验很差
+ * - 根据设备宽度和高度计算是否能在安全区域展示完全
+ * - 按比例换算画布大小
  */
 export const CarveScene = () => {
   const { t } = useTranslation()
@@ -31,21 +35,19 @@ export const CarveScene = () => {
 
   return (
     <YStack flex={1}>
-      <ScrollView>
-        <ActionStatus />
-        <DrawingBoard ref={drawingBoardRef} />
-        <ActionStack />
-        <SliderStack />
-        <XStack px={pxSpace} justifyContent="space-between">
-          <ActionButton icon={<Layers />}>{t('material')}</ActionButton>
-          <ActionButton icon={<Type />}>{t('text')}</ActionButton>
-          <ActionButton icon={<Brush />}>{t('brush')}</ActionButton>
-          <ActionButton onPress={() => drawingBoardRef?.current?.pickImage?.()} icon={<Image />}>
-            {t('album')}
-          </ActionButton>
-          <ActionButton icon={<View />}>{t('preview')}</ActionButton>
-        </XStack>
-      </ScrollView>
+      <ActionStatus />
+      <DrawingBoard ref={drawingBoardRef} />
+      <ActionStack />
+      <SliderStack />
+      <XStack px={pxSpace} justifyContent="space-between">
+        <ActionButton icon={<Layers />}>{t('material')}</ActionButton>
+        <ActionButton icon={<Type />}>{t('text')}</ActionButton>
+        <ActionButton icon={<Brush />}>{t('brush')}</ActionButton>
+        <ActionButton onPress={() => drawingBoardRef?.current?.pickImage?.()} icon={<Image />}>
+          {t('album')}
+        </ActionButton>
+        <ActionButton icon={<View />}>{t('preview')}</ActionButton>
+      </XStack>
     </YStack>
   )
 }
