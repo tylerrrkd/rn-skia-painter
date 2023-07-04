@@ -11,7 +11,7 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "@shopify/react-native-skia": "^0.1.193",
+    "@shopify/react-native-skia": "^0.1.172",
     "zustand": "^4.3.8"
   }
 }
