@@ -17,7 +17,7 @@
     "@my/ui": "*",
     "@react-navigation/native": "^6.1.6",
     "@shopify/react-native-skia": "0.1.172",
-    "@types/react-native": "^0.71.3",
+    "@types/react-native": "0.71.8",
     "app": "*",
     "babel-plugin-module-resolver": "^4.1.0",
     "burnt": "^0.10.0",

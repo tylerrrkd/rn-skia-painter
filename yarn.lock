@@ -3541,7 +3541,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@my/skia@workspace:packages/skia"
   dependencies:
-    "@shopify/react-native-skia": ^0.1.172
+    "@shopify/react-native-skia": 0.1.172
     expo-image-picker: ~14.1.1
   languageName: unknown
   linkType: soft
@@ -3550,7 +3550,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@my/stores@workspace:packages/stores"
   dependencies:
-    "@shopify/react-native-skia": ^0.1.172
+    "@shopify/react-native-skia": 0.1.172
     zustand: ^4.3.8
   languageName: unknown
   linkType: soft
@@ -4252,27 +4252,6 @@ __metadata:
   bin:
     setup-skia-web: scripts/setup-canvaskit.js
   checksum: 469526c9c8b884bc9abda9e456e96f61dadd4883b52bcaf9f6ee0a52cac3f669b3a1167c0c1abc3573ac2422b90352d99914458050975406631d1d9f33e12787
-  languageName: node
-  linkType: hard
-
-"@shopify/react-native-skia@npm:^0.1.172":
-  version: 0.1.197
-  resolution: "@shopify/react-native-skia@npm:0.1.197"
-  dependencies:
-    canvaskit-wasm: 0.38.0
-    react-reconciler: ^0.27.0
-  peerDependencies:
-    react: ">=18.0"
-    react-native: ">=0.64"
-    react-native-reanimated: ">=2.0.0"
-  peerDependenciesMeta:
-    react-native:
-      optional: true
-    react-native-reanimated:
-      optional: true
-  bin:
-    setup-skia-web: scripts/setup-canvaskit.js
-  checksum: 71f94738343880e3266366c5d80589e1c95ebf376d3763fc2cc03b99e6748642e5afb87f8ced0872bc1d79720e8aca98fe4a216815262cf634383c71db4eafbe
   languageName: node
   linkType: hard
 
@@ -5869,12 +5848,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native@npm:^0.71.3":
-  version: 0.71.6
-  resolution: "@types/react-native@npm:0.71.6"
+"@types/react-native@npm:0.71.8":
+  version: 0.71.8
+  resolution: "@types/react-native@npm:0.71.8"
   dependencies:
     "@types/react": "*"
-  checksum: 067325c549e7181c73cdf8da1cb7bdef226124d91c3f72fcc2fb8b3c98a2d184f74a16ba627e3192253103bd651e8238d0e722b93f762b3f1a3f5b96773ec7a5
+  checksum: 20ea5ee86a6695273fc4b76c736b8975758205bc5f1f223c6c34f07b485502a7851e20f9c9b368cbea6a83c8a59c3e7d0c1b60bf4d7ce5329916d2f3934a8250
   languageName: node
   linkType: hard
 
@@ -6590,14 +6569,14 @@ __metadata:
     "@tamagui/shorthands": latest
     "@tamagui/themes": latest
     "@types/react": ^18.0.27
-    "@types/react-native": ^0.71.3
+    "@types/react-native": 0.71.8
     burnt: ^0.10.0
     expo-constants: ^14.2.1
     expo-linking: ^4.0.1
     rc-util: ^5.33.0
     react-native-gesture-handler: ~2.9.0
     react-native-reanimated: ~2.14.4
-    react-native-safe-area-context: ^4.5.2
+    react-native-safe-area-context: 4.5.0
     solito: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -10144,7 +10123,7 @@ __metadata:
     "@react-navigation/native": ^6.1.6
     "@shopify/react-native-skia": 0.1.172
     "@tamagui/babel-plugin": latest
-    "@types/react-native": ^0.71.3
+    "@types/react-native": 0.71.8
     app: "*"
     babel-plugin-module-resolver: ^4.1.0
     babel-plugin-transform-inline-environment-variables: ^0.4.4
@@ -14941,7 +14920,7 @@ __metadata:
     raf: ^3.4.1
     react: ^18.2.0
     react-dom: ^18.2.0
-    react-native: ^0.71.4
+    react-native: 0.71.8
     react-native-web: ^0.18.12
     react-native-web-lite: latest
     vercel: latest
@@ -16655,13 +16634,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gradle-plugin@npm:^0.71.17":
-  version: 0.71.17
-  resolution: "react-native-gradle-plugin@npm:0.71.17"
-  checksum: 5ff996bafc3959a36551dc34d481cefb070ede4025b5eb2ce659f51adf74ba0e6845cc019ea1d547e0b4007f1c3c68146fa719688f09bde308f25320c6c6f834
-  languageName: node
-  linkType: hard
-
 "react-native-gradle-plugin@npm:^0.71.18":
   version: 0.71.19
   resolution: "react-native-gradle-plugin@npm:0.71.19"
@@ -16695,16 +16667,6 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 958df1d20492aa89c23d746f88409a3a3bd1b0d397c80310a4b0bbec9888cbbeb7579c9c92dad46841e2e6536491806206228ba009b7c8af970670aef8273a30
-  languageName: node
-  linkType: hard
-
-"react-native-safe-area-context@npm:^4.5.2":
-  version: 4.5.2
-  resolution: "react-native-safe-area-context@npm:4.5.2"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 05916a99015b25ef0cb04ae429b17cda18aa73d8f25e4ad51a9ef253b445c335bb9d0f90dc45859fa23be520c32b723334166475ac47888d4ee67d301885d5a5
   languageName: node
   linkType: hard
 
@@ -16825,52 +16787,6 @@ __metadata:
   bin:
     react-native: cli.js
   checksum: fe887c1b8bded23f9efea9dc10a8a8b2f32147e06418fc9a78294944874797abb0185ebcb0fdc5ce88046280bca72264ae8d119f4ca681a3e0bc502d0f75bfbe
-  languageName: node
-  linkType: hard
-
-"react-native@npm:^0.71.4":
-  version: 0.71.7
-  resolution: "react-native@npm:0.71.7"
-  dependencies:
-    "@jest/create-cache-key-function": ^29.2.1
-    "@react-native-community/cli": 10.2.2
-    "@react-native-community/cli-platform-android": 10.2.0
-    "@react-native-community/cli-platform-ios": 10.2.1
-    "@react-native/assets": 1.0.0
-    "@react-native/normalize-color": 2.1.0
-    "@react-native/polyfills": 2.0.0
-    abort-controller: ^3.0.0
-    anser: ^1.4.9
-    base64-js: ^1.1.2
-    deprecated-react-native-prop-types: ^3.0.1
-    event-target-shim: ^5.0.1
-    invariant: ^2.2.4
-    jest-environment-node: ^29.2.1
-    jsc-android: ^250231.0.0
-    memoize-one: ^5.0.0
-    metro-react-native-babel-transformer: 0.73.9
-    metro-runtime: 0.73.9
-    metro-source-map: 0.73.9
-    mkdirp: ^0.5.1
-    nullthrows: ^1.1.1
-    pretty-format: ^26.5.2
-    promise: ^8.3.0
-    react-devtools-core: ^4.26.1
-    react-native-codegen: ^0.71.5
-    react-native-gradle-plugin: ^0.71.17
-    react-refresh: ^0.4.0
-    react-shallow-renderer: ^16.15.0
-    regenerator-runtime: ^0.13.2
-    scheduler: ^0.23.0
-    stacktrace-parser: ^0.1.3
-    use-sync-external-store: ^1.0.0
-    whatwg-fetch: ^3.0.0
-    ws: ^6.2.2
-  peerDependencies:
-    react: 18.2.0
-  bin:
-    react-native: cli.js
-  checksum: efd91d5560290b883e0d3d3482cc4657268c2e480171b63a0c6b7dc8f6b1331298feac7d9966e1831d95d9fee893dfa831252052561232843e4982880238f09e
   languageName: node
   linkType: hard
 

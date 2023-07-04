@@ -11,7 +11,7 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "@shopify/react-native-skia": "^0.1.172",
+    "@shopify/react-native-skia": "0.1.172",
     "expo-image-picker": "~14.1.1"
   }
 }
