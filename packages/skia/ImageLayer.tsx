@@ -1,12 +1,26 @@
-import { ColorMatrix, Image } from '@shopify/react-native-skia'
-import type { ImageProps, SkiaProps, MatrixColorFilterProps } from '@shopify/react-native-skia'
+import { ColorMatrix, Group, Image } from '@shopify/react-native-skia'
+import type {
+  ImageProps,
+  SkiaProps,
+  MatrixColorFilterProps,
+  SkMatrix,
+} from '@shopify/react-native-skia'
 
-export type ImageLayerProps = {
+export interface ImageLayerProps {
+  id: string
+  matrix: SkMatrix
+  imageProps: SkiaProps<ImageProps>
   colorMatrixProps?: MatrixColorFilterProps
-} & SkiaProps<ImageProps>
+}
 
-const ImageLayer: React.FC<ImageLayerProps> = ({ colorMatrixProps, ...props }) => {
-  return <Image {...props}>{colorMatrixProps && <ColorMatrix {...colorMatrixProps} />}</Image>
+const ImageLayer: React.FC<ImageLayerProps> = ({ matrix, colorMatrixProps, imageProps }) => {
+  return (
+    <Group matrix={matrix}>
+      <Image x={0} y={0} {...imageProps}>
+        {colorMatrixProps && <ColorMatrix {...colorMatrixProps} />}
+      </Image>
+    </Group>
+  )
 }
 
 export default ImageLayer
