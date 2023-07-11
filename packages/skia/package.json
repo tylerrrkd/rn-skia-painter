@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "@shopify/react-native-skia": "0.1.172",
-    "expo-image-picker": "~14.1.1"
+    "expo-image-picker": "~14.1.1",
+    "react-native-get-random-values": "~1.8.0",
+    "uuid": "^9.0.0"
   }
 }
