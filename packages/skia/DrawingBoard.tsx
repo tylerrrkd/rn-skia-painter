@@ -3,13 +3,13 @@ import { LayoutChangeEvent } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Skia, Canvas, CanvasProps, rect } from '@shopify/react-native-skia'
 import { MediaTypeOptions, launchImageLibraryAsync } from 'expo-image-picker'
-import { useDrawingBoardStore } from '@my/stores'
+import { useDrawingBoardStore, LayerType } from '@my/stores'
 import { useToastController } from '@tamagui/toast'
-import ImageLayer from './ImageLayer'
 import { GestureHandler } from './GestureHandler'
 import { Dimensions } from 'react-native'
 import 'react-native-get-random-values'
 import { v4 as uuidv4 } from 'uuid'
+import Layer from './Layer'
 
 const { width: screenWidth } = Dimensions.get('window')
 
@@ -48,9 +48,9 @@ const GRAY_SCALE = [
  */
 export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
   ({ style, ...props }, ref) => {
-    const imageLayers = useDrawingBoardStore((state) => state.imageLayers)
-    const addImageLayer = useDrawingBoardStore((state) => state.addImageLayer)
-    const changeImageLayer = useDrawingBoardStore((state) => state.changeImageLayer)
+    const layers = useDrawingBoardStore((state) => state.layers)
+    const addLayer = useDrawingBoardStore((state) => state.addLayer)
+    const changeLayer = useDrawingBoardStore((state) => state.changeLayer)
     const Toast = useToastController()
     const [height, setHeight] = useState(screenWidth)
 
@@ -73,17 +73,18 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
         const image = Skia.Image.MakeImageFromEncoded(assetData)
         const matrix = Skia.Matrix()
         image &&
-          addImageLayer({
+          addLayer({
             id: uuidv4(),
+            type: LayerType.album,
             matrix,
-            imageProps: {
+            props: {
               image,
               fit: 'contain',
               width: height,
               height,
-            },
-            colorMatrixProps: {
-              matrix: BLACK_AND_WHITE,
+              colorMatrixProps: {
+                matrix: BLACK_AND_WHITE,
+              },
             },
           })
       } else {
@@ -111,23 +112,18 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
           ]}
           {...props}
         >
-          {imageLayers.map((props) => (
-            <ImageLayer key={props?.id} {...props} />
-          ))}
+          {layers.map((layer) => {
+            return <Layer key={layer.id} {...layer} />
+          })}
         </Canvas>
-        {imageLayers?.map?.((props) => (
+        {layers?.map?.((layer) => (
           <GestureHandler
-            key={props.id}
-            matrix={props?.matrix}
-            dimensions={rect(
-              0,
-              0,
-              (props?.imageProps as any)?.width,
-              (props?.imageProps as any)?.height
-            )}
+            key={layer.id}
+            matrix={layer.matrix}
+            dimensions={rect(0, 0, (layer?.props as any)?.width, (layer?.props as any)?.height)}
             onMatrixChange={(matrix) =>
-              changeImageLayer({
-                ...props,
+              changeLayer({
+                ...layer,
                 matrix,
               })
             }

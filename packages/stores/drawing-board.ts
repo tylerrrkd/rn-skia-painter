@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
 import type { ImageLayerProps } from '@my/skia/ImageLayer'
+import { SkMatrix } from '@shopify/react-native-skia'
 
 export enum LayerType {
   material = 'material',
@@ -9,30 +10,32 @@ export enum LayerType {
   album = 'album',
 }
 
-export interface LayerInfo {
+export interface LayerCommon {
+  id: string
   type: LayerType
+  matrix: SkMatrix
+}
+
+export interface LayerInfo extends LayerCommon {
+  props: ImageLayerProps
 }
 
 export const useDrawingBoardStore = create(
   combine(
     {
       /**
-       * 当前操作的图层
+       * 各个图层
        */
-      currentLayer: {} as LayerInfo,
-      /**
-       * 相册里导入的图片
-       */
-      imageLayers: [] as ImageLayerProps[],
+      layers: [] as LayerInfo[],
     },
     (set, get) => ({
-      addImageLayer: (imageLayer: ImageLayerProps) => {
-        set({ imageLayers: [...get().imageLayers, imageLayer] })
+      addLayer: (layer: LayerInfo) => {
+        set({ layers: [...get().layers, layer] })
       },
-      changeImageLayer: (imageLayer: ImageLayerProps) => {
-        // 受控的挪到第一个
-        const shaking = get().imageLayers?.filter?.((layer) => layer.id !== imageLayer.id)
-        set({ imageLayers: [imageLayer, ...shaking] })
+      changeLayer: (currentLayer: LayerInfo) => {
+        // 受控的挪到最上面(最后一个渲染)
+        const shaking = get().layers?.filter?.((layer) => layer.id !== currentLayer.id)
+        set({ layers: [...shaking, currentLayer] })
       },
     })
   )

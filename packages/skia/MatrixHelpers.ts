@@ -2,6 +2,7 @@ import type { SkMatrix, Vector } from '@shopify/react-native-skia'
 import { Skia, MatrixIndex } from '@shopify/react-native-skia'
 
 export const scale = (matrix: SkMatrix, s: number, origin: Vector) => {
+  'worklet'
   const source = Skia.Matrix(matrix.get())
   source.translate(origin.x, origin.y)
   source.scale(s, s)
@@ -10,6 +11,7 @@ export const scale = (matrix: SkMatrix, s: number, origin: Vector) => {
 }
 
 export const rotateZ = (matrix: SkMatrix, theta: number, origin: Vector) => {
+  'worklet'
   const source = Skia.Matrix(matrix.get())
   source.translate(origin.x, origin.y)
   source.rotate(theta)
@@ -18,6 +20,7 @@ export const rotateZ = (matrix: SkMatrix, theta: number, origin: Vector) => {
 }
 
 export const translate = (matrix: SkMatrix, x: number, y: number) => {
+  'worklet'
   const m = Skia.Matrix()
   m.translate(x, y)
   m.concat(matrix)
@@ -25,6 +28,7 @@ export const translate = (matrix: SkMatrix, x: number, y: number) => {
 }
 
 export const toM4 = (m3: SkMatrix) => {
+  'worklet'
   const m = m3.get()
   const tx = m[MatrixIndex.TransX]!
   const ty = m[MatrixIndex.TransY]!
