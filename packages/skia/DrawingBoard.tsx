@@ -112,9 +112,9 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
           ]}
           {...props}
         >
-          {layers.map((layer) => {
-            return <Layer key={layer.id} {...layer} />
-          })}
+          {layers.map((layer) => (
+            <Layer key={layer.id} {...layer} />
+          ))}
         </Canvas>
         {layers?.map?.((layer) => (
           <GestureHandler
