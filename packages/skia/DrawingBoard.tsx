@@ -117,6 +117,7 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
         </Canvas>
         {imageLayers?.map?.((props) => (
           <GestureHandler
+            key={props.id}
             matrix={props?.matrix}
             dimensions={rect(
               0,
