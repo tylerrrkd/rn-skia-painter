@@ -10,6 +10,7 @@ interface GestureHandlerProps {
   matrix: SkMatrix
   dimensions: SkRect
   debug?: boolean
+  onSelect?: () => void
   onMatrixChange?: (matrix: SkMatrix) => void
 }
 
@@ -17,17 +18,22 @@ export const GestureHandler = ({
   matrix,
   dimensions,
   debug,
+  onSelect,
   onMatrixChange,
 }: GestureHandlerProps) => {
   const { x, y, width, height } = dimensions
   const origin = useSharedValue(Skia.Point(0, 0))
   const offset = useSharedValue(Skia.Matrix())
 
-  const pan = Gesture.Pan().runOnJS(true).onChange((e) => {
-    onMatrixChange?.(translate(matrix, e.changeX, e.changeY))
-  })
+  const pan = Gesture.Pan()
+    .runOnJS(true)
+    .onBegin(() => onSelect?.())
+    .onChange((e) => {
+      onMatrixChange?.(translate(matrix, e.changeX, e.changeY))
+    })
 
-  const rotate = Gesture.Rotation().runOnJS(true)
+  const rotate = Gesture.Rotation()
+    .runOnJS(true)
     .onBegin((e) => {
       origin.value = Skia.Point(e.anchorX, e.anchorY)
       offset.value = matrix
@@ -36,7 +42,8 @@ export const GestureHandler = ({
       onMatrixChange?.(rotateZ(offset.value, e.rotation, origin.value))
     })
 
-  const pinch = Gesture.Pinch().runOnJS(true)
+  const pinch = Gesture.Pinch()
+    .runOnJS(true)
     .onBegin((e) => {
       origin.value = Skia.Point(e.focalX, e.focalY)
       offset.value = matrix

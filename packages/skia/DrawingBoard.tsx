@@ -121,6 +121,7 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
             key={layer.id}
             matrix={layer.matrix}
             dimensions={rect(0, 0, (layer?.props as any)?.width, (layer?.props as any)?.height)}
+            onSelect={() => changeLayer(layer)}
             onMatrixChange={(matrix) =>
               changeLayer({
                 ...layer,
