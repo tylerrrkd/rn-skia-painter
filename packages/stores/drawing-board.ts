@@ -29,6 +29,7 @@ export const useDrawingBoardStore = create(
       layers: [] as LayerInfo[],
     },
     (set, get) => ({
+      clearLayers: () => set({ layers: [] }),
       addLayer: (layer: LayerInfo) => {
         set({ layers: [...get().layers, layer] })
       },
