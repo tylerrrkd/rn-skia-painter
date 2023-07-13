@@ -1,6 +1,6 @@
 import type { SkMatrix, SkRect } from '@shopify/react-native-skia'
 import { Skia } from '@shopify/react-native-skia'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated'
 
@@ -52,6 +52,8 @@ export const GestureHandler = ({
       onMatrixChange?.(scale(offset.value, e.scale, origin.value))
     })
 
+  const m4Matrix = useMemo(() => toM4(matrix), [matrix])
+
   const style = useAnimatedStyle(() => {
     return {
       position: 'absolute',
@@ -59,19 +61,21 @@ export const GestureHandler = ({
       top: y,
       width,
       height,
-      backgroundColor: debug ? 'rgba(100, 200, 300, 0.4)' : 'transparent',
+      backgroundColor: debug ? 'rgba(100, 200, 300, 0.2)' : 'transparent',
       transform: [
         { translateX: -width / 2 },
         { translateY: -height / 2 },
-        // {
-        //   matrix: toM4(matrix),
-        // },
+        {
+          matrix: m4Matrix,
+        },
         { translateX: width / 2 },
         { translateY: height / 2 },
       ],
     }
-  })
+  }, [matrix])
+
   const gesture = Gesture.Race(pinch, rotate, pan)
+
   return (
     <GestureDetector gesture={gesture}>
       <Animated.View style={style} />
