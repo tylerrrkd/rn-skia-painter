@@ -3,15 +3,13 @@ import { LayoutChangeEvent } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Skia, Canvas, CanvasProps, rect } from '@shopify/react-native-skia'
 import { MediaTypeOptions, launchImageLibraryAsync } from 'expo-image-picker'
-import { useDrawingBoardStore, LayerType } from '@my/stores'
+import { useDrawingBoardStore, LayerType, useDrawingCanvastore } from '@my/stores'
 import { useToastController } from '@tamagui/toast'
 import { GestureHandler } from './GestureHandler'
-import { Dimensions } from 'react-native'
 import 'react-native-get-random-values'
 import { v4 as uuidv4 } from 'uuid'
 import Layer from './Layer'
-
-const { width: screenWidth } = Dimensions.get('window')
+import { getRatio, scaleByRatio } from './utils'
 
 export type DrawingBoardProps = Omit<CanvasProps, 'children'>
 export interface DrawingBoardRef {
@@ -51,12 +49,11 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
     const layers = useDrawingBoardStore((state) => state.layers)
     const addLayer = useDrawingBoardStore((state) => state.addLayer)
     const changeLayer = useDrawingBoardStore((state) => state.changeLayer)
+    const { canvasWidth, canvasHeight } = useDrawingCanvastore((state) => ({
+      canvasWidth: state.width,
+      canvasHeight: state.height,
+    }))
     const Toast = useToastController()
-    const [height, setHeight] = useState(screenWidth)
-
-    const onLayout = (event: LayoutChangeEvent) => {
-      setHeight(event.nativeEvent.layout.width)
-    }
 
     const pickImage = async () => {
       // No permissions request is necessary for launching the image library
@@ -80,9 +77,9 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
             props: {
               image,
               fit: 'contain',
-              width: height,
+              width: canvasWidth,
               // 按比例缩放
-              height: (height / image.width()) * image.height(),
+              height: scaleByRatio(getRatio(canvasHeight, image.width()), image.height()),
               colorMatrixProps: {
                 matrix: BLACK_AND_WHITE,
               },
@@ -100,11 +97,10 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
     return (
       <GestureHandlerRootView>
         <Canvas
-          onLayout={onLayout}
           style={[
             {
-              width: '100%',
-              height,
+              width: canvasWidth,
+              height: canvasHeight,
               borderWidth: 2,
               borderColor: '#ff0000',
               backgroundColor: '#f4f4f4',
@@ -119,6 +115,7 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
         </Canvas>
         {layers?.map?.((layer) => (
           <GestureHandler
+            debug
             key={layer.id}
             matrix={layer.matrix}
             dimensions={rect(0, 0, (layer?.props as any)?.width, (layer?.props as any)?.height)}

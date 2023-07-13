@@ -1,16 +1,14 @@
 import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
-import type { ImageLayerProps } from '@my/skia/ImageLayer'
+import { Dimensions } from 'react-native'
 
-export interface ImageLayer {
-  image: ImageLayerProps
-}
+const { width: screenWidth } = Dimensions.get('window')
 
 export const useDrawingCanvastore = create(
   combine(
     {
-      width: 0,
-      height: 0,
+      width: screenWidth,
+      height: screenWidth,
     },
     (set) => ({
       setSize: ({ width, height }: { width: number; height: number }) => {
