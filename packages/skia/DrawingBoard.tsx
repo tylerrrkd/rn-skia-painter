@@ -81,7 +81,8 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
               image,
               fit: 'contain',
               width: height,
-              height,
+              // 按比例缩放
+              height: (height / image.width()) * image.height(),
               colorMatrixProps: {
                 matrix: BLACK_AND_WHITE,
               },
