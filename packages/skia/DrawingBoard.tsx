@@ -115,7 +115,6 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
         </Canvas>
         {layers?.map?.((layer) => (
           <GestureHandler
-            debug
             key={layer.id}
             matrix={layer.matrix}
             dimensions={rect(0, 0, (layer?.props as any)?.width, (layer?.props as any)?.height)}
