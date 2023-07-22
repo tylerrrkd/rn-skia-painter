@@ -1,0 +1,16 @@
+{
+  "name": "@my/command",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.ts",
+  "types": "index.ts",
+  "author": "Tylerrrkd",
+  "files": [
+    "index.ts"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "zustand": "^4.3.8"
+  }
+}

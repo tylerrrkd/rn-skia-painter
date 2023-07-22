@@ -1,20 +1,37 @@
 import { HomeScreen } from 'app/features/home/screen'
-import { ButtonText, SRConnectIPDialog, SRIconButton, SRScreen } from '@my/ui'
+import { ButtonText, SRConnectIPDialog, SRIconButton, SRScreen, SRConnectIPDialogRef } from '@my/ui'
 import { Settings } from '@tamagui/lucide-icons'
 // import { useMemo } from 'react'
 import { useTranslation } from '@my/locales'
 import { useLink } from 'solito/link'
+import { useSettingStore } from '@my/stores'
+import { useCallback, useEffect, useRef } from 'react'
 
 export default () => {
   const { t } = useTranslation()
+
+  const connectIPDialogRef = useRef<SRConnectIPDialogRef>(null)
+
+  const { current: connectIPDialog } = connectIPDialogRef
 
   const settingLink = useLink({
     href: '/setting',
   })
 
-  const isConnected = false
+  const isConnected = useSettingStore((s) => s.isConnected)
 
   // const disabled = useMemo(() => !isConnected, [isConnected])
+
+  const initStatus = useCallback(async () => {
+    const IPAddress = await connectIPDialog?.initIPAddressFromStorage?.()
+    if (IPAddress) {
+      connectIPDialog?.reportStatus()
+    }
+  }, [connectIPDialog])
+
+  useEffect(() => {
+    initStatus()
+  }, [connectIPDialog])
 
   return (
     <>
@@ -26,6 +43,7 @@ export default () => {
           ),
           headerRight: () => (
             <SRConnectIPDialog
+              ref={connectIPDialogRef}
               trigger={
                 <ButtonText
                   pressStyle={{

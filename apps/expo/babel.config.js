@@ -14,6 +14,8 @@ module.exports = function (api) {
             '@my/ui': '../../packages/ui',
             '@my/locales': '../../packages/locales',
             '@my/stores': '../../packages/stores',
+            '@my/skia': '../../packages/skia',
+            '@my/command': '../../packages/command',
             '@': './',
           },
           extensions: ['.js', '.jsx', '.tsx', '.ios.js', '.android.js'],
