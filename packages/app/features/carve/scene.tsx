@@ -1,10 +1,11 @@
-import React, { useRef } from 'react'
+import React, { useCallback, useMemo, useRef } from 'react'
 import { useTranslation } from '@my/locales'
 import { SpaceTokens, XStack, YStack } from '@my/ui'
 import { Layers, Type, Brush, Image, View } from '@tamagui/lucide-icons'
 import { DrawingBoard, DrawingBoardRef } from '@my/skia'
 import { ActionButton, ActionStatus } from './actions'
 import { ActionStack, SliderStack } from './operations'
+import { useDrawingBoardStore } from '@my/stores'
 
 const pxSpace: SpaceTokens = '$3.5'
 
@@ -32,12 +33,28 @@ const pxSpace: SpaceTokens = '$3.5'
 export const CarveScene = () => {
   const { t } = useTranslation()
   const drawingBoardRef = useRef<DrawingBoardRef>(null)
+  const currentLayer = useDrawingBoardStore((s) => s.currentLayer)
+  const changeLayer = useDrawingBoardStore((s) => s.changeLayer)
+
+  const layerType = useMemo(() => currentLayer.type, [currentLayer])
+
+  const onAction = useCallback(
+    (shader: any) =>
+      changeLayer({
+        ...currentLayer,
+        props: {
+          ...currentLayer.props,
+          shader,
+        },
+      }),
+    [currentLayer]
+  )
 
   return (
     <YStack flex={1}>
       <ActionStatus />
       <DrawingBoard ref={drawingBoardRef} />
-      <ActionStack />
+      <ActionStack layerType={layerType} onAction={onAction} />
       <SliderStack />
       <XStack px={pxSpace} justifyContent="space-between">
         <ActionButton icon={<Layers />}>{t('material')}</ActionButton>

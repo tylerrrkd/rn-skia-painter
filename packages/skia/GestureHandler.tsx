@@ -31,6 +31,7 @@ export const GestureHandler = ({
     .onChange((e) => {
       onMatrixChange?.(translate(matrix, e.changeX, e.changeY))
     })
+    .onEnd(() => onSelect?.())
 
   const rotate = Gesture.Rotation()
     .runOnJS(true)

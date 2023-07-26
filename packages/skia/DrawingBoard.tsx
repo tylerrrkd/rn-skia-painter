@@ -1,5 +1,4 @@
-import { useState, forwardRef, useImperativeHandle } from 'react'
-import { LayoutChangeEvent } from 'react-native'
+import { forwardRef, useImperativeHandle } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Skia, Canvas, CanvasProps, rect } from '@shopify/react-native-skia'
 import { MediaTypeOptions, launchImageLibraryAsync } from 'expo-image-picker'
@@ -16,28 +15,6 @@ export interface DrawingBoardRef {
   pickImage: () => Promise<void>
 }
 
-// https://kazzkiq.github.io/svg-color-filter/
-const BLACK_AND_WHITE = [
-  // r-rbgam
-  0, 1, 0, 0, 0,
-  // g-rbgam
-  0, 1, 0, 0, 0,
-  // b-rbgam
-  0, 1, 0, 0, 0,
-  // a-rbgam
-  0, 0, 0, 1, 0,
-]
-const GRAY_SCALE = [
-  // r-rbgam
-  1, 0, 0, 0, 0,
-  // g-rbgam
-  1, 0, 0, 0, 0,
-  // b-rbgam
-  1, 0, 0, 0, 0,
-  // a-rbgam
-  0, 0, 0, 1, 0,
-]
-
 /**
  * TODO:
  * 1. 滤镜(颜色模式) 黑白二值、
@@ -49,6 +26,7 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
     const layers = useDrawingBoardStore((state) => state.layers)
     const addLayer = useDrawingBoardStore((state) => state.addLayer)
     const changeLayer = useDrawingBoardStore((state) => state.changeLayer)
+    const setCurrentLayer = useDrawingBoardStore((state) => state.setCurrentLayer)
     const { canvasWidth, canvasHeight } = useDrawingCanvastore((state) => ({
       canvasWidth: state.width,
       canvasHeight: state.height,
@@ -80,9 +58,7 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
               width: canvasWidth,
               // 按比例缩放
               height: scaleByRatio(getRatio(canvasHeight, image.width()), image.height()),
-              colorMatrixProps: {
-                matrix: BLACK_AND_WHITE,
-              },
+              shader: 'grayscale',
             },
           })
       } else {
@@ -118,7 +94,7 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
             key={layer.id}
             matrix={layer.matrix}
             dimensions={rect(0, 0, (layer?.props as any)?.width, (layer?.props as any)?.height)}
-            onSelect={() => changeLayer(layer)}
+            onSelect={() => setCurrentLayer(layer)}
             onMatrixChange={(matrix) =>
               changeLayer({
                 ...layer,

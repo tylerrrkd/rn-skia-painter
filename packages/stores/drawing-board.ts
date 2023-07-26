@@ -27,11 +27,17 @@ export const useDrawingBoardStore = create(
        * 各个图层
        */
       layers: [] as LayerInfo[],
+      currentLayer: {} as LayerInfo,
     },
     (set, get) => ({
       clearLayers: () => set({ layers: [] }),
       addLayer: (layer: LayerInfo) => {
         set({ layers: [...get().layers, layer] })
+      },
+      setCurrentLayer: (currentLayer: LayerInfo) => {
+        // 受控的挪到最上面(最后一个渲染)
+        const shaking = get().layers?.filter?.((layer) => layer.id !== currentLayer.id)
+        set({ layers: [...shaking, currentLayer], currentLayer })
       },
       changeLayer: (currentLayer: LayerInfo) => {
         // 受控的挪到最上面(最后一个渲染)

@@ -10,7 +10,7 @@ import ImageLayer from './ImageLayer'
 const Layer: React.FC<LayerInfo> = ({ type, matrix, props }) => {
   const layer = useMemo(() => {
     if (type === LayerType.album) return <ImageLayer {...props} />
-  }, [type])
+  }, [type, props])
 
   return <Group matrix={matrix}>{layer}</Group>
 }
