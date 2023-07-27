@@ -1,8 +1,12 @@
 import type { SkMatrix, SkRect } from '@shopify/react-native-skia'
 import { Skia } from '@shopify/react-native-skia'
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
-import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  cancelAnimation,
+} from 'react-native-reanimated'
 
 import { rotateZ, toM4, translate, scale } from './MatrixHelpers'
 
@@ -74,6 +78,13 @@ export const GestureHandler = ({
       ],
     }
   }, [matrix])
+
+  // When unmounting the component we need to cancel animations if any
+  useEffect(() => {
+    return () => {
+      cancelAnimation(offset)
+    }
+  })
 
   const gesture = Gesture.Race(pinch, rotate, pan)
 
