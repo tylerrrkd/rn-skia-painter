@@ -37,6 +37,8 @@ const ZH: Record<TranslationKey, string> = {
   width: '宽度',
   height: '高度',
   'fixed scale': '按比例缩放',
+  loading: '加载中',
+  'content empty': '内容为空',
 }
 
 export default ZH

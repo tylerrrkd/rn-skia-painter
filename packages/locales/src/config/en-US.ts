@@ -35,4 +35,6 @@ export default {
   width: 'width',
   height: 'height',
   'fixed scale': 'fixed scale',
+  loading: 'loading',
+  'content empty': 'content empty',
 }
