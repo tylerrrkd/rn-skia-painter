@@ -81,9 +81,22 @@ export interface ActionSliderProps {
   onChange?: (value: number) => void
   name: string
   extra?: React.ReactNode
+  unit?: string
+  max?: number
+  min?: number
+  step?: number
 }
 
-export const ActionSlider: React.FC<ActionSliderProps> = ({ value = 0, onChange, name, extra }) => {
+export const ActionSlider: React.FC<ActionSliderProps> = ({
+  value = 0,
+  onChange,
+  name,
+  extra,
+  unit,
+  max,
+  min,
+  step,
+}) => {
   return (
     <XStack
       px={pxSpace}
@@ -93,13 +106,17 @@ export const ActionSlider: React.FC<ActionSliderProps> = ({ value = 0, onChange,
       justifyContent="center"
     >
       <Text>{name}</Text>
-      <Text>{value}%</Text>
+      <Text>
+        {value}
+        {unit}
+      </Text>
       <Slider
         onValueChange={(values) => onChange?.(values[0]!)}
         flex={1}
         defaultValue={[value]}
-        max={100}
-        step={1}
+        max={max}
+        step={step}
+        min={min}
       >
         <Slider.Track backgroundColor={'$inactive'}>
           <Slider.TrackActive backgroundColor={'$primary'} />
