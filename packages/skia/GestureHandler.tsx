@@ -46,6 +46,7 @@ export const GestureHandler = ({
     .onChange((e) => {
       onMatrixChange?.(rotateZ(offset.value, e.rotation, origin.value))
     })
+    .onEnd(() => onSelect?.())
 
   const pinch = Gesture.Pinch()
     .runOnJS(true)
@@ -56,6 +57,7 @@ export const GestureHandler = ({
     .onChange((e) => {
       onMatrixChange?.(scale(offset.value, e.scale, origin.value))
     })
+    .onEnd(() => onSelect?.())
 
   const m4Matrix = useMemo(() => toM4(matrix), [matrix])
 
