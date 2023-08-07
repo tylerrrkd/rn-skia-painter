@@ -38,7 +38,7 @@ const ZH: Record<TranslationKey, string> = {
   height: '高度',
   'fixed scale': '按比例缩放',
   loading: '加载中',
-  'content empty': '内容为空',
+  'content is empty': '内容为空',
   'you did not choose image': '您未选择图片',
 }
 

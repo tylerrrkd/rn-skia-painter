@@ -36,6 +36,6 @@ export default {
   height: 'height',
   'fixed scale': 'fixed scale',
   loading: 'loading',
-  'content empty': 'content empty',
+  'content is empty': 'content is empty',
   'you did not choose image': 'you did not choose image',
 }

@@ -23,7 +23,7 @@ export const FileListScreen = () => {
     <YStack flex={1}>
       {isLoading ? <Text mx="auto" my="auto">{t('loading')}...</Text> : <>
         <YGroup backgroundColor={'white'} borderRadius={0} scrollable flex={1}>
-          {Number(data?.files?.length) <= 0 ? <Text mx="auto" my="auto">{t('content empty')}</Text> : data?.files?.map?.((file, key) => (
+          {Number(data?.files?.length) <= 0 ? <Text mx="auto" my="auto">{t('content is empty')}</Text> : data?.files?.map?.((file, key) => (
             <YGroup.Item key={key}>
               <ListItem
                 backgroundColor={'white'}
