@@ -1,8 +1,5 @@
 import { Toast, useToastState } from '@tamagui/toast'
 import { YStack } from 'tamagui'
-import { Dimensions } from 'react-native'
-
-const { height: screenHeight } = Dimensions.get('window')
 
 export const CustomToast = () => {
   const currentToast = useToastState()
@@ -18,7 +15,7 @@ export const CustomToast = () => {
       viewportName={currentToast.viewportName}
       enterStyle={{ opacity: 0, scale: 0.5 }}
       exitStyle={{ opacity: 0, scale: 1 }}
-      y={(screenHeight - 120) / 2}
+      y={0}
       opacity={1}
       scale={1}
       animation="quick"
