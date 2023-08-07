@@ -39,6 +39,7 @@ const ZH: Record<TranslationKey, string> = {
   'fixed scale': '按比例缩放',
   loading: '加载中',
   'content empty': '内容为空',
+  'you did not choose image': '您未选择图片',
 }
 
 export default ZH

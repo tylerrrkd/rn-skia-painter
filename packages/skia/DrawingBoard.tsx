@@ -9,6 +9,7 @@ import 'react-native-get-random-values'
 import { v4 as uuidv4 } from 'uuid'
 import Layer from './Layer'
 import { getRatio, scaleByRatio } from './utils'
+import { useTranslation } from '@my/locales'
 
 export type DrawingBoardProps = Omit<CanvasProps, 'children'>
 export interface DrawingBoardRef {
@@ -23,6 +24,7 @@ export interface DrawingBoardRef {
  */
 export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
   ({ style, ...props }, ref) => {
+    const { t } = useTranslation()
     const layers = useDrawingBoardStore((state) => state.layers)
     const addLayer = useDrawingBoardStore((state) => state.addLayer)
     const changeLayer = useDrawingBoardStore((state) => state.changeLayer)
@@ -62,7 +64,7 @@ export const DrawingBoard = forwardRef<DrawingBoardRef, DrawingBoardProps>(
             },
           })
       } else {
-        Toast.show('未选择图片')
+        Toast.show(t('you did not choose image'))
       }
     }
 

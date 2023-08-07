@@ -37,4 +37,5 @@ export default {
   'fixed scale': 'fixed scale',
   loading: 'loading',
   'content empty': 'content empty',
+  'you did not choose image': 'you did not choose image',
 }
