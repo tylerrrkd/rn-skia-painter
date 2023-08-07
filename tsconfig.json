@@ -9,6 +9,7 @@
       "@my/stores/*": ["./packages/stores/*"],
       "@my/skia/*": ["./packages/skia/*"],
       "@my/command/*": ["./packages/command/*"],
+      "@my/cnc/*": ["./packages/cnc/*"],
     }
   },
   "extends": "expo/tsconfig.base"

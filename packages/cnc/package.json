@@ -1,0 +1,13 @@
+{
+  "name": "@my/cnc",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.ts",
+  "types": "index.ts",
+  "author": "Tylerrrkd",
+  "files": [
+    "index.ts"
+  ],
+  "license": "ISC"
+}

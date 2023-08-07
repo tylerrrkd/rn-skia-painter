@@ -3536,6 +3536,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@my/cnc@*, @my/cnc@workspace:packages/cnc":
+  version: 0.0.0-use.local
+  resolution: "@my/cnc@workspace:packages/cnc"
+  languageName: unknown
+  linkType: soft
+
 "@my/command@*, @my/command@workspace:packages/command":
   version: 0.0.0-use.local
   resolution: "@my/command@workspace:packages/command"
@@ -6584,6 +6590,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "app@workspace:packages/app"
   dependencies:
+    "@my/cnc": "*"
     "@my/command": "*"
     "@my/locales": "*"
     "@my/skia": "*"
@@ -10177,6 +10184,7 @@ __metadata:
     "@babel/core": ^7.17.9
     "@babel/runtime": ^7.18.9
     "@expo/metro-config": ^0.3.21
+    "@my/cnc": "*"
     "@my/command": "*"
     "@my/locales": "*"
     "@my/skia": "*"

@@ -16,6 +16,7 @@ module.exports = function (api) {
             '@my/stores': '../../packages/stores',
             '@my/skia': '../../packages/skia',
             '@my/command': '../../packages/command',
+            '@my/cnc': '../../packages/cnc',
             '@': './',
           },
           extensions: ['.js', '.jsx', '.tsx', '.ios.js', '.android.js'],
