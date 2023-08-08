@@ -40,6 +40,7 @@ const ZH: Record<TranslationKey, string> = {
   loading: '加载中',
   'content is empty': '内容为空',
   'you did not choose image': '您未选择图片',
+  'did not connect to device': '未连接到设备',
 }
 
 export default ZH
