@@ -4,9 +4,6 @@ import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import { useColorScheme } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { QueryClient, QueryClientProvider } from 'react-query'
-
-const queryClient = new QueryClient()
 
 export default () => {
   const [loaded] = useFonts({
@@ -20,7 +17,6 @@ export default () => {
   }
   return (
     <Provider>
-      <QueryClientProvider client={queryClient}>
         <ThemeProvider
           value={{
             dark: scheme === 'dark',
@@ -34,7 +30,6 @@ export default () => {
           <StatusBar style="dark" />
           <Stack />
         </ThemeProvider>
-      </QueryClientProvider>
     </Provider>
   )
 }

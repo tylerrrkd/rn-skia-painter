@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useImperativeHandle, forwardRef } fro
 import { GetProps, Input, XStack } from 'tamagui'
 import { useTranslation } from '@my/locales'
 import { useSettingStore } from '@my/stores'
-import { useReportstatus } from '@my/command'
+import { useReportStatus } from '@my/command'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { SRDialog } from './SRDialog'
 
@@ -22,7 +22,7 @@ export const SRConnectIPDialog = forwardRef<SRConnectIPDialogRef, GetProps<typeo
     ])
     const [typingIPAddress, setTypingIPAddress] = useState<string>()
     const [isError, setIsError] = useState(false)
-    const { refetch: reportStatus } = useReportstatus()
+    const { run: reportStatus } = useReportStatus()
 
     useEffect(() => {
       IPAddress && setTypingIPAddress(IPAddress)

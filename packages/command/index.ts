@@ -1,5 +1,5 @@
-import { useSettingStore } from '@my/stores'
-import { useQuery } from 'react-query'
+import { translate, useSettingStore } from '@my/stores'
+import { useRequest } from 'ahooks'
 import axios from 'axios'
 
 const REPORT_STATUS = 'reportstatus'
@@ -11,9 +11,15 @@ const getBaseURL = () => {
   return IPAddress ? `http://${IPAddress}:80/` : ''
 }
 
+axios.defaults.timeout = 5000
+
 axios.interceptors.request.use(
   (config) => {
+    config.baseURL = config.baseURL ?? getBaseURL()
     // Do something before request is sent
+    if (!config.baseURL) {
+      throw new Error(translate('did not connect to device'))
+    }
     return config
   },
   (error) => {
@@ -21,6 +27,7 @@ axios.interceptors.request.use(
     return Promise.reject(error)
   }
 )
+
 axios.interceptors.response.use(
   (response) => {
     // Do something before request is sent
@@ -32,13 +39,11 @@ axios.interceptors.response.use(
   }
 )
 
-export const useReportstatus = () => {
+export const useReportStatus = () => {
   // TODO: 100ms 轮询，失败时自动中断请求
-  return useQuery(
-    'status',
+  return useRequest(
     async () => {
       const res = await axios({
-        baseURL: getBaseURL(),
         url: REPORT_STATUS,
         method: 'GET',
       })
@@ -46,7 +51,11 @@ export const useReportstatus = () => {
         isConnected: !!res?.data,
       })
     },
-    { refetchOnWindowFocus: false, refetchOnMount: false, enabled: false }
+    {
+      cacheKey: REPORT_STATUS,
+      manual: true,
+      onError: () => {},
+    }
   )
 }
 
@@ -66,12 +75,9 @@ export interface FileList {
 }
 
 export const useFileList = () => {
-  return useQuery<FileList>(
-    'status',
-    async (meta) => {
-      console.log(meta,)
+  return useRequest(
+    async () => {
       const res = await axios({
-        baseURL: getBaseURL(),
         url: FILE_LIST,
         method: 'GET',
         params: {
@@ -81,16 +87,14 @@ export const useFileList = () => {
       })
       return res?.data || {}
     },
-    { refetchOnWindowFocus: false, refetchOnMount: false, enabled: false }
+    { cacheKey: FILE_LIST, manual: true }
   )
 }
 
 export const useHandleExecPrint = ({ path, fileName }: { path: string; fileName: string }) => {
-  return useQuery(
-    'status',
+  return useRequest(
     async () => {
       const res = await axios({
-        baseURL: getBaseURL(),
         url: COMMAND,
         method: 'GET',
         params: {
@@ -101,6 +105,6 @@ export const useHandleExecPrint = ({ path, fileName }: { path: string; fileName:
       })
       return res?.data
     },
-    { refetchOnWindowFocus: false, refetchOnMount: false, enabled: false }
+    { manual: true }
   )
 }
