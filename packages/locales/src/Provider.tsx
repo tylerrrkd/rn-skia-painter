@@ -5,6 +5,7 @@ import { KEY_LOCALES, fetchLocale, getLanguageCodeFromStorageOrDevice } from './
 import { useToastController } from '@my/ui'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { getLocales } from 'expo-localization'
+import { useSettingStore } from '@my/stores'
 
 const systemLanguageCode = getLocales()?.[0]?.languageCode
 
@@ -26,6 +27,8 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }
   const toast = useToastController()
 
   const [state, setState] = useState<ProviderState>(initialState)
+
+  const setLocal = useSettingStore((s) => s.setLocale)
 
   const { currentLanguage } = state
 
@@ -85,6 +88,9 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }
     },
     [translate]
   )
+
+  // 监听当前语言变化
+  useEffect(() => setLocal(languageMap.get(currentLanguage.code) ?? {}), [currentLanguage])
 
   const providerValue = useMemo(() => {
     return { ...state, setLanguage, t: translate }
