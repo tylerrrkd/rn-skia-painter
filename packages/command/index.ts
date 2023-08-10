@@ -65,6 +65,10 @@ export interface FileList {
     shortname: string
     size: string
     datetime: string
+    isPrevious: boolean
+    isFolder: boolean
+    isUnknown: boolean
+    isNCFile: boolean
   }[]
   path: string
   total: string
@@ -74,26 +78,51 @@ export interface FileList {
   status: string
 }
 
-export const useFileList = () => {
+const ncReg = /^.+(\.nc)$/i
+
+export const useFileList = (path: string = '/') => {
   return useRequest(
     async () => {
       const res = await axios({
         url: FILE_LIST,
         method: 'GET',
         params: {
-          path: '/',
+          path,
           PAGEID: 0,
         },
       })
-      return (res?.data || {}) as FileList
+      const isRootPath = path === '/'
+      return ({
+        ...res?.data,
+        files: [
+          ...(isRootPath
+            ? []
+            : [
+                {
+                  name: '...',
+                  isPrevious: true,
+                },
+              ]),
+          ...res?.data?.files?.map?.((file: FileList['files'][number]) => {
+            const isFolder = file.size === '-1'
+            const isNCFile = ncReg.test(file.name)
+            return {
+              ...file,
+              isFolder,
+              isUnknown: !isNCFile,
+              isNCFile,
+            }
+          }),
+        ],
+      } || {}) as FileList
     },
-    { cacheKey: FILE_LIST, manual: true }
+    { cacheKey: FILE_LIST, refreshDeps: [path] }
   )
 }
 
-export const useHandleExecPrint = ({ path, fileName }: { path: string; fileName: string }) => {
+export const useHandleExecPrint = () => {
   return useRequest(
-    async () => {
+    async ({ path, fileName }: { path: string; fileName: string }) => {
       const res = await axios({
         url: COMMAND,
         method: 'GET',
