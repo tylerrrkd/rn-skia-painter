@@ -85,7 +85,7 @@ export const useFileList = () => {
           PAGEID: 0,
         },
       })
-      return res?.data || {}
+      return (res?.data || {}) as FileList
     },
     { cacheKey: FILE_LIST, manual: true }
   )
