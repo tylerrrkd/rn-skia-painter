@@ -1,0 +1,116 @@
+
+#define CLIENT_SERIAL 0
+#define CLIENT_BT 1
+#define CLIENT_WEBUI 2
+#define CLIENT_TELNET 3
+#define CLIENT_INPUT 4
+#define CLIENT_ALL 0xFF
+#define CLIENT_COUNT 5  // total number of client types regardless if they are used
+
+
+
+扫描文档
+
+http://192.168.0.111/upload?path=/&PAGEID=0
+path	/
+PAGEID	0
+
+{"files":
+[
+{"name":"System Volume Information","shortname":"System Volume Information","size":"-1","datetime":""},
+{"name":"Laser.nc","shortname":"Laser.nc","size":"8.92 MB","datetime":""},
+{"name":"Lase666.nc","shortname":"Lase666.nc","size":"388.70 KB","datetime":""},
+{"name":"srwor.nc","shortname":"srwor.nc","size":"753 B","datetime":""}
+]
+,"path":"/"
+,"total":"14.45 GB"=
+,"used":"9.37 MB"
+,"occupation":"1"
+,"mode":"direct"
+,"status":"Ok"}
+
+询问状态
+http://192.168.0.111/reportstatus
+
+解锁
+
+http://192.168.0.111/command?commandText=$X&PAGEID=0
+
+$X
+
+移动  
+	左
+http://192.168.0.111/command?commandText=$J=G91%20G21%20F2400.0%20X-10.0&PAGEID=0
+
+$J=G91 G21 F2400.0 X-10.0
+
+右
+http://192.168.0.111/command?commandText=$J=G91%20G21%20F2400.0%20X10.0&PAGEID=0
+
+$J=G91 G21 F2400.0 X10.0
+
+上
+http://192.168.0.111/command?commandText=$J=G91%20G21%20F2400.0%20Y10.0&PAGEID=0
+
+$J=G91 G21 F2400.0 Y10.0
+
+下
+http://192.168.0.111/command?commandText=$J=G91%20G21%20F2400.0%20Y-10.0&PAGEID=0
+
+$J=G91 G21 F2400.0 Y-10.0
+
+
+设置原点
+http://192.168.0.111/command?commandText=G92X0Y0&PAGEID=0
+G92X0Y0
+http://192.168.0.111/command?commandText=G28.1&PAGEID=0
+G28.1
+
+回原点
+http://192.168.0.111/command?commandText=G0X0Y0&PAGEID=0
+G0X0Y0
+
+打开弱光
+http://192.168.0.111/command?commandText=M3%20S10&PAGEID=0
+M3 S10
+
+打开强光
+http://192.168.0.111/command?commandText=M3%20S255&PAGEID=0
+M3 S255
+
+
+关闭激光
+http://192.168.0.111/command?commandText=M5&PAGEID=0
+M5
+
+
+中心
+http://192.168.0.111/command?commandText=$H%0AG92%20X0%20Y0%0AG1%20X89.3%20Y44.3%20F4000%0AG92%20X0%20Y0%0AG28.1&PAGEID=0
+
+$H
+G92 X0 Y0
+G1 X89.3 Y44.3 F4000
+G92 X0 Y0
+G28.1
+
+重置
+http://192.168.0.111/command?commandText=%18&PAGEID=0
+
+
+
+
+开始雕刻
+http://192.168.0.111/command?commandText=%5BESP220%5D/Laser888.nc&PAGEI=0
+commandText	[ESP220]/Laser888.nc
+PAGEI	    0
+
+
+删除文件
+http://192.168.0.111/upload?path=%2F&action=delete&filename=srwor.nc&PAGEID=0
+action	delete
+filename	srwor.nc
+PAGEID	0
+path	/
+
+文件列表获取
+http://192.168.0.111/upload?path=/&PAGEID=0
