@@ -3566,7 +3566,7 @@ __metadata:
   dependencies:
     "@shopify/react-native-skia": 0.1.172
     expo-image-picker: ~14.1.1
-    react-native-get-random-values: ~1.8.0
+    react-native-get-random-values: ~1.9.0
     uuid: ^9.0.0
   languageName: unknown
   linkType: soft
@@ -16766,17 +16766,6 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 6bfdd9d23486193424dcfb0073dd821a216c2783dde746d73a3441e920602343f09efa10261c6f09fcbcb645d029a95305c86f61997053c01ad89751c8c6d236
-  languageName: node
-  linkType: hard
-
-"react-native-get-random-values@npm:~1.8.0":
-  version: 1.8.0
-  resolution: "react-native-get-random-values@npm:1.8.0"
-  dependencies:
-    fast-base64-decode: ^1.0.0
-  peerDependencies:
-    react-native: ">=0.56"
-  checksum: 9163368ebd935d897f6ea0f9e95c476aa7608080e3848bb6c6f85db01b9de3498d857795c84df5492d6511a55aebf89492860ac886b652a9a7a3efdb19913f87
   languageName: node
   linkType: hard
 

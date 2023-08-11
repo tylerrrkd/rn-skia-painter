@@ -5,6 +5,7 @@ import { useSettingStore } from '@my/stores'
 import { useReportStatus } from '@my/command'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { SRDialog } from './SRDialog'
+import { useToastController } from '@tamagui/toast'
 
 export const KEY_IP_ADDRESS = 'ipAddress'
 
@@ -15,6 +16,7 @@ export interface SRConnectIPDialogRef {
 
 export const SRConnectIPDialog = forwardRef<SRConnectIPDialogRef, GetProps<typeof SRDialog>>(
   ({ ...props }, ref) => {
+    const Toast = useToastController()
     const { t } = useTranslation()
     const [IPAddress, setIPAddress] = useSettingStore((state) => [
       state.IPAddress,
@@ -22,7 +24,7 @@ export const SRConnectIPDialog = forwardRef<SRConnectIPDialogRef, GetProps<typeo
     ])
     const [typingIPAddress, setTypingIPAddress] = useState<string>()
     const [isError, setIsError] = useState(false)
-    const { run: reportStatus } = useReportStatus()
+    const { run: reportStatus, error } = useReportStatus(IPAddress)
 
     useEffect(() => {
       IPAddress && setTypingIPAddress(IPAddress)
@@ -33,6 +35,16 @@ export const SRConnectIPDialog = forwardRef<SRConnectIPDialogRef, GetProps<typeo
       setIPAddress(IPAddress)
       return IPAddress
     }, [])
+
+    useEffect(() => {
+      if (error?.message) {
+        if (error.message.includes('timeout')) {
+          Toast.show(t('connection timeout, please check if the device is online'))
+        } else {
+          Toast.show(error.message)
+        }
+      }
+    }, [error])
 
     useImperativeHandle(ref, () => ({
       initIPAddressFromStorage,

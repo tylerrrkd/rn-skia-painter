@@ -22,15 +22,8 @@ export default () => {
 
   // const disabled = useMemo(() => !isConnected, [isConnected])
 
-  const initStatus = useCallback(async () => {
-    const IPAddress = await connectIPDialog?.initIPAddressFromStorage?.()
-    if (IPAddress) {
-      connectIPDialog?.reportStatus()
-    }
-  }, [connectIPDialog])
-
   useEffect(() => {
-    initStatus()
+    connectIPDialog?.initIPAddressFromStorage?.()
   }, [connectIPDialog])
 
   return (

@@ -39,4 +39,6 @@ export default {
   'content is empty': 'content is empty',
   'you did not choose image': 'you did not choose image',
   'did not connect to device': 'did not connect to device',
+  'connection timeout, please check if the device is online':
+    'connection timeout, please check if the device is online',
 }

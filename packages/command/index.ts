@@ -11,7 +11,7 @@ const getBaseURL = () => {
   return IPAddress ? `http://${IPAddress}:80/` : ''
 }
 
-axios.defaults.timeout = 5000
+axios.defaults.timeout = 2000 // global timeout setting
 
 axios.interceptors.request.use(
   (config) => {
@@ -39,10 +39,15 @@ axios.interceptors.response.use(
   }
 )
 
-export const useReportStatus = () => {
-  // TODO: 100ms 轮询，失败时自动中断请求
+/**
+ * useRequest
+ * @see https://ahooks.js.org/hooks/use-request/polling
+ */
+export const useReportStatus = (IPAddress: string) => {
+  // 100ms 轮询，失败时自动中断请求
   return useRequest(
     async () => {
+      console.log('REPORT_STATUS POLLING')
       const res = await axios({
         url: REPORT_STATUS,
         method: 'GET',
@@ -53,8 +58,15 @@ export const useReportStatus = () => {
     },
     {
       cacheKey: REPORT_STATUS,
-      manual: true,
-      onError: () => {},
+      ready: !!IPAddress,
+      refreshDeps: [IPAddress],
+      pollingInterval: 1500,
+      pollingErrorRetryCount: 0, // 轮询失败不做尝试
+      onError: () => {
+        useSettingStore.setState({
+          isConnected: false,
+        })
+      },
     }
   )
 }
