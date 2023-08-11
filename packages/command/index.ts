@@ -47,7 +47,7 @@ export const useReportStatus = (IPAddress: string) => {
   // 100ms 轮询，失败时自动中断请求
   return useRequest(
     async () => {
-      console.log('REPORT_STATUS POLLING')
+      // console.log('REPORT_STATUS POLLING')
       const res = await axios({
         url: REPORT_STATUS,
         method: 'GET',
@@ -132,6 +132,9 @@ export const useFileList = (path: string = '/') => {
   )
 }
 
+/**
+ * @description 开始雕刻
+ */
 export const useHandleExecPrint = () => {
   return useRequest(
     async ({ path, fileName }: { path: string; fileName: string }) => {
@@ -147,5 +150,29 @@ export const useHandleExecPrint = () => {
       return res?.data
     },
     { manual: true }
+  )
+}
+
+/**
+ * @description 删除文件
+ */
+export const useHandleDeleteFile = (onSuccess: () => void) => {
+  return useRequest(
+    async ({ path, fileName }: { path: string; fileName: string }) => {
+      const res = await axios({
+        url: FILE_LIST,
+        method: 'GET',
+        params: {
+          // upload?path=%2F&action=delete&filename=srwor.nc&PAGEID=0
+          path,
+          action: 'delete',
+          fileName,
+          PAGEID: 0,
+        },
+      })
+      console.log(res.data)
+      return res?.data
+    },
+    { manual: true, onSuccess }
   )
 }

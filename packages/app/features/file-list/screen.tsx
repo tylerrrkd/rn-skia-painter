@@ -2,17 +2,8 @@ import { ListItem, SRIconButton, Text, XStack, YGroup, YStack } from '@my/ui'
 import React, { useState } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useTranslation } from '@my/locales'
-import {
-  Play,
-  Trash2,
-  FileImage,
-  FileSearch,
-  FilePlus2,
-  FolderClosed,
-  FolderOpen,
-  FileX,
-} from '@tamagui/lucide-icons'
-import { FileList, useFileList, useHandleExecPrint } from '@my/command'
+import { Play, Trash2, FileImage, FolderClosed, FolderOpen, FileX } from '@tamagui/lucide-icons'
+import { FileList, useFileList, useHandleDeleteFile, useHandleExecPrint } from '@my/command'
 
 const ROOT_PATH = '/'
 
@@ -35,11 +26,12 @@ export const FileListScreen = () => {
   const { t } = useTranslation()
 
   const [path, setPath] = useState(ROOT_PATH)
-  const { data, loading } = useFileList(path)
+  const { data, loading, refresh } = useFileList(path)
   const { run: handleExecPrint } = useHandleExecPrint()
+  const { run: handleDeleteFile } = useHandleDeleteFile(refresh)
 
   return (
-    <YStack flex={1}>
+    <YStack flex={1} paddingBottom={bottom}>
       {loading ? (
         <Text mx="auto" my="auto">
           {t('loading')}...
@@ -88,7 +80,18 @@ export const FileListScreen = () => {
                               })
                             }}
                           />
-                          <SRIconButton size="$2" icon={Trash2} circular borderWidth={2} />
+                          <SRIconButton
+                            size="$2"
+                            icon={Trash2}
+                            circular
+                            borderWidth={2}
+                            onPress={() => {
+                              handleDeleteFile({
+                                path,
+                                fileName: file.name,
+                              })
+                            }}
+                          />
                         </XStack>
                       ) : undefined
                     }
@@ -97,7 +100,7 @@ export const FileListScreen = () => {
               ))
             )}
           </YGroup>
-          <XStack space="$4" justifyContent="center" bottom={bottom}>
+          {/* <XStack space="$4" justifyContent="center" bottom={bottom}>
             <SRIconButton
               color={'black'}
               height={'$8'}
@@ -114,7 +117,7 @@ export const FileListScreen = () => {
             >
               {t('choose file')}
             </SRIconButton>
-          </XStack>
+          </XStack> */}
         </>
       )}
     </YStack>
