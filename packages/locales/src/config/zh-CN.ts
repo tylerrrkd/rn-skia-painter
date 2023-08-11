@@ -42,6 +42,7 @@ const ZH: Record<TranslationKey, string> = {
   'you did not choose image': '您未选择图片',
   'did not connect to device': '未连接到设备',
   'connection timeout, please check if the device is online': '连接超时，请检查设备是否在线',
+  'fetch content fail, please try again': '获取内容失败，请重试',
 }
 
 export default ZH

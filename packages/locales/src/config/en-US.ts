@@ -41,4 +41,5 @@ export default {
   'did not connect to device': 'did not connect to device',
   'connection timeout, please check if the device is online':
     'connection timeout, please check if the device is online',
+  'fetch content fail, please try again': 'fetch content fail, please try again',
 }

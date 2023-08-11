@@ -1,4 +1,4 @@
-import { ListItem, SRIconButton, Text, XStack, YGroup, YStack } from '@my/ui'
+import { ListItem, SRIconButton, Text, XStack, YGroup, YStack, useToastController } from '@my/ui'
 import React, { useState } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useTranslation } from '@my/locales'
@@ -24,9 +24,10 @@ const FileIcon: React.FC<{ file: FileList['files'][number] }> = ({ file }) => {
 export const FileListScreen = () => {
   const { bottom } = useSafeAreaInsets()
   const { t } = useTranslation()
+  const Toast = useToastController()
 
   const [path, setPath] = useState(ROOT_PATH)
-  const { data, loading, refresh } = useFileList(path)
+  const { data, loading, refresh, error } = useFileList(path)
   const { run: handleExecPrint } = useHandleExecPrint()
   const { run: handleDeleteFile } = useHandleDeleteFile(refresh)
 
@@ -36,69 +37,71 @@ export const FileListScreen = () => {
         <Text mx="auto" my="auto">
           {t('loading')}...
         </Text>
+      ) : error ? (
+        <Text mx="auto" my="auto">
+          {t('fetch content fail, please try again')}
+        </Text>
+      ) : !data?.files?.length ? (
+        <Text mx="auto" my="auto">
+          {t('content is empty')}
+        </Text>
       ) : (
         <>
           <YGroup backgroundColor={'white'} borderRadius={0} scrollable flex={1}>
-            {Number(data?.files?.length) <= 0 ? (
-              <Text mx="auto" my="auto">
-                {t('content is empty')}
-              </Text>
-            ) : (
-              data?.files?.map?.((file, key) => (
-                <YGroup.Item key={key}>
-                  <ListItem
-                    onPress={() => {
-                      if (file.isFolder) {
-                        setPath((path) => `${path}${SEPERATOR}${file.name}`)
-                      } else if (file.isPrevious) {
-                        setPath((path) => {
-                          const pathArray = path.split(SEPERATOR)
-                          pathArray.splice(-1)
-                          return pathArray.join(SEPERATOR)
-                        })
-                      }
-                    }}
-                    backgroundColor={'white'}
-                    borderStyle={'solid'}
-                    borderBottomWidth={1}
-                    borderBottomColor={'#CBCBCB'}
-                    icon={<FileIcon file={file} />}
-                    title={file?.name || '-'}
-                    iconAfter={
-                      file.isNCFile ? (
-                        <XStack space={'$3'}>
-                          <SRIconButton
-                            size="$2"
-                            icon={Play}
-                            circular
-                            borderWidth={2}
-                            paddingLeft={2}
-                            onPress={() => {
-                              handleExecPrint({
-                                path,
-                                fileName: file.name,
-                              })
-                            }}
-                          />
-                          <SRIconButton
-                            size="$2"
-                            icon={Trash2}
-                            circular
-                            borderWidth={2}
-                            onPress={() => {
-                              handleDeleteFile({
-                                path,
-                                fileName: file.name,
-                              })
-                            }}
-                          />
-                        </XStack>
-                      ) : undefined
+            {data?.files?.map?.((file, key) => (
+              <YGroup.Item key={key}>
+                <ListItem
+                  onPress={() => {
+                    if (file.isFolder) {
+                      setPath((path) => `${path}${SEPERATOR}${file.name}`)
+                    } else if (file.isPrevious) {
+                      setPath((path) => {
+                        const pathArray = path.split(SEPERATOR)
+                        pathArray.splice(-1)
+                        return pathArray.join(SEPERATOR)
+                      })
                     }
-                  />
-                </YGroup.Item>
-              ))
-            )}
+                  }}
+                  backgroundColor={'white'}
+                  borderStyle={'solid'}
+                  borderBottomWidth={1}
+                  borderBottomColor={'#CBCBCB'}
+                  icon={<FileIcon file={file} />}
+                  title={file?.name || '-'}
+                  iconAfter={
+                    file.isNCFile ? (
+                      <XStack space={'$3'}>
+                        <SRIconButton
+                          size="$2"
+                          icon={Play}
+                          circular
+                          borderWidth={2}
+                          paddingLeft={2}
+                          onPress={() => {
+                            handleExecPrint({
+                              path,
+                              fileName: file.name,
+                            })
+                          }}
+                        />
+                        <SRIconButton
+                          size="$2"
+                          icon={Trash2}
+                          circular
+                          borderWidth={2}
+                          onPress={() => {
+                            handleDeleteFile({
+                              path,
+                              fileName: file.name,
+                            })
+                          }}
+                        />
+                      </XStack>
+                    ) : undefined
+                  }
+                />
+              </YGroup.Item>
+            ))}
           </YGroup>
           {/* <XStack space="$4" justifyContent="center" bottom={bottom}>
             <SRIconButton
