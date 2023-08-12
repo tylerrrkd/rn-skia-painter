@@ -67,20 +67,54 @@ export const ActionStack: React.FC<ActionStackProps> = ({ layerType, onAction, .
   )
 }
 
-type SliderStackProps = GetProps<typeof YStack>
+type SliderStackProps = GetProps<typeof YStack> & {
+  layerType?: LayerType
+  value?: number
+  onChange?: (value: number) => void
+}
+
+const brushSizeSliderProps = {
+  name: 'brush size',
+  extra: <SRIconButton icon={<Undo2 color="black" size="$1.5" />} />,
+}
+
+const contrastRatioProps = {
+  name: 'contrast ratio',
+}
+
 // 辅助动作区
-export const SliderStack: React.FC<SliderStackProps> = (props) => {
+export const SliderStack: React.FC<SliderStackProps> = ({
+  layerType,
+  value,
+  onChange,
+  ...props
+}) => {
   const { t } = useTranslation()
+
+  const actionProps = useMemo(() => {
+    switch (layerType) {
+      case LayerType.material:
+        return undefined
+      case LayerType.text:
+        return undefined
+      case LayerType.brush:
+        return brushSizeSliderProps
+      case LayerType.album:
+        return contrastRatioProps
+      default:
+        return undefined
+    }
+  }, [layerType])
 
   return (
     <YStack minHeight={String(actionSliderHeight)} {...props}>
-      {true ? (
+      {actionProps && (
         <ActionSlider
-          name={t('brush size')}
-          extra={<SRIconButton icon={<Undo2 color="black" size="$1.5" />} />}
+          {...actionProps}
+          name={t(actionProps.name)}
+          value={value}
+          onChange={onChange}
         />
-      ) : (
-        <ActionSlider name={t('contrast ratio')} />
       )}
     </YStack>
   )

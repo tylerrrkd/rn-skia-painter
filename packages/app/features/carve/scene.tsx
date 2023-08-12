@@ -55,7 +55,7 @@ export const CarveScene = () => {
       <ActionStatus />
       <DrawingBoard ref={drawingBoardRef} />
       <ActionStack layerType={layerType} onAction={onAction} />
-      <SliderStack />
+      <SliderStack layerType={layerType} />
       <XStack px={pxSpace} justifyContent="space-between">
         <ActionButton icon={<Layers />}>{t('material')}</ActionButton>
         <ActionButton icon={<Type />}>{t('text')}</ActionButton>
