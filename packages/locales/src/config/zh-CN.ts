@@ -45,6 +45,7 @@ const ZH: Record<TranslationKey, string> = {
   'fetch content fail, please try again': '获取内容失败，请重试',
   'connected the incorrect IP address': '连接了不正确的IP地址',
   'device unconnected': '设备未连接',
+  'execute carve task fail, please try again': '执行雕刻人物失败，请重试',
 }
 
 export default ZH

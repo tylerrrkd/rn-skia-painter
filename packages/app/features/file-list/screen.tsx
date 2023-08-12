@@ -1,4 +1,4 @@
-import { ListItem, SRIconButton, Text, XStack, YGroup, YStack } from '@my/ui'
+import { ListItem, SRIconButton, Text, XStack, YGroup, YStack, useToastController } from '@my/ui'
 import React, { useState } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useTranslation } from '@my/locales'
@@ -25,12 +25,16 @@ const FileIcon: React.FC<{ file: FileList['files'][number] }> = ({ file }) => {
 export const FileListScreen = () => {
   const isConnected = useSettingStore((s) => s.isConnected)
 
+  const Toast = useToastController()
+
   const { bottom } = useSafeAreaInsets()
   const { t } = useTranslation()
 
   const [path, setPath] = useState(ROOT_PATH)
   const { data, loading, refresh, error } = useFileList(path)
-  const { run: handleExecPrint } = useHandleExecPrint()
+  const { run: handleExecPrint } = useHandleExecPrint(() => {
+    Toast.show(t('execute carve task fail, please try again'))
+  })
   const { run: handleDeleteFile } = useHandleDeleteFile(refresh)
 
   return (

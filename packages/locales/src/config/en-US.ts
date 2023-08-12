@@ -44,4 +44,5 @@ export default {
   'fetch content fail, please try again': 'fetch content fail, please try again',
   'connected the incorrect IP address': 'connected the incorrect IP address',
   'device unconnected': 'device unconnected',
+  'execute carve task fail, please try again': 'execute carve task fail, please try again',
 }
