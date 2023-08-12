@@ -40,6 +40,8 @@ export const SRConnectIPDialog = forwardRef<SRConnectIPDialogRef, GetProps<typeo
       if (error?.message) {
         if (error.message.includes('timeout')) {
           Toast.show(t('connection timeout, please check if the device is online'))
+        } else if (error.message.includes('404')) {
+          Toast.show(t('connected the incorrect IP address'))
         } else {
           Toast.show(error.message)
         }

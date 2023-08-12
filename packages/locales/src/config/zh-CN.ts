@@ -43,6 +43,8 @@ const ZH: Record<TranslationKey, string> = {
   'did not connect to device': '未连接到设备',
   'connection timeout, please check if the device is online': '连接超时，请检查设备是否在线',
   'fetch content fail, please try again': '获取内容失败，请重试',
+  'connected the incorrect IP address': '连接了不正确的IP地址',
+  'device unconnected': '设备未连接',
 }
 
 export default ZH

@@ -1,9 +1,10 @@
-import { ListItem, SRIconButton, Text, XStack, YGroup, YStack, useToastController } from '@my/ui'
+import { ListItem, SRIconButton, Text, XStack, YGroup, YStack } from '@my/ui'
 import React, { useState } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useTranslation } from '@my/locales'
 import { Play, Trash2, FileImage, FolderClosed, FolderOpen, FileX } from '@tamagui/lucide-icons'
 import { FileList, useFileList, useHandleDeleteFile, useHandleExecPrint } from '@my/command'
+import { useSettingStore } from '@my/stores'
 
 const ROOT_PATH = '/'
 
@@ -22,9 +23,10 @@ const FileIcon: React.FC<{ file: FileList['files'][number] }> = ({ file }) => {
 }
 
 export const FileListScreen = () => {
+  const isConnected = useSettingStore((s) => s.isConnected)
+
   const { bottom } = useSafeAreaInsets()
   const { t } = useTranslation()
-  const Toast = useToastController()
 
   const [path, setPath] = useState(ROOT_PATH)
   const { data, loading, refresh, error } = useFileList(path)
@@ -39,7 +41,7 @@ export const FileListScreen = () => {
         </Text>
       ) : error ? (
         <Text mx="auto" my="auto">
-          {t('fetch content fail, please try again')}
+          {t(isConnected ? 'fetch content fail, please try again' : 'device unconnected')}
         </Text>
       ) : !data?.files?.length ? (
         <Text mx="auto" my="auto">
