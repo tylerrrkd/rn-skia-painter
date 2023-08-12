@@ -10236,6 +10236,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-native: 0.71.8
+    react-native-ftp-client-latest: ^1.1.1
     react-native-gesture-handler: ~2.9.0
     react-native-get-random-values: ~1.9.0
     react-native-reanimated: ~2.14.4
@@ -16750,6 +16751,15 @@ __metadata:
     jscodeshift: ^0.13.1
     nullthrows: ^1.1.1
   checksum: d3a40b557d4b3a0d51664070eb8388b0dde247a0518025ff5a815d3573c98ff16f616df8236e827ee16625f685169931db5c966dd144d860ad5aed437b65b28c
+  languageName: node
+  linkType: hard
+
+"react-native-ftp-client-latest@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "react-native-ftp-client-latest@npm:1.1.1"
+  peerDependencies:
+    react-native: 0.71.8
+  checksum: 968ed889265cbab662196e9489067b70e6bcb325321ef2ca57bf79412d72772def0be8906e596039afc922eba168ecbf790246002c8beffa65094cb24a2563ad
   languageName: node
   linkType: hard
 
