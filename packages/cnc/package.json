@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "main": "index.ts",
-  "types": "index.ts",
+  "main": "index.tsx",
+  "types": "index.tsx",
   "author": "Tylerrrkd",
   "files": [
     "index.ts"
