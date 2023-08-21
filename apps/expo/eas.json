@@ -21,6 +21,20 @@
       "env": {
         "TAMAGUI_TARGET": "native"
       }
+    },
+    "preview": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true,
+        "image": "latest"
+      },
+      "env": {
+        "TAMAGUI_TARGET": "native"
+      }
     }
   }
 }

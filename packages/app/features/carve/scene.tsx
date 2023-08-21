@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from 'react'
+import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react'
 import { useTranslation } from '@my/locales'
 import { SpaceTokens, XStack, YStack } from '@my/ui'
 import { Layers, Type, Brush, Image, View } from '@tamagui/lucide-icons'
@@ -30,7 +30,10 @@ const pxSpace: SpaceTokens = '$3.5'
  * - 根据设备宽度和高度计算是否能在安全区域展示完全
  * - 按比例换算画布大小
  */
-export const CarveScene = () => {
+export interface CarveSceneRef {
+  drawingBoard: DrawingBoardRef | null
+}
+export const CarveScene = forwardRef<CarveSceneRef, {}>((_props, ref) => {
   const { t } = useTranslation()
   const drawingBoardRef = useRef<DrawingBoardRef>(null)
   const currentLayer = useDrawingBoardStore((s) => s.currentLayer)
@@ -50,6 +53,14 @@ export const CarveScene = () => {
     [currentLayer]
   )
 
+  useImperativeHandle(
+    ref,
+    () => ({
+      drawingBoard: drawingBoardRef.current,
+    }),
+    [drawingBoardRef.current]
+  )
+
   return (
     <YStack flex={1}>
       <ActionStatus />
@@ -67,4 +78,4 @@ export const CarveScene = () => {
       </XStack>
     </YStack>
   )
-}
+})

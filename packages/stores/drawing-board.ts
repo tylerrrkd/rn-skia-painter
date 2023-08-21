@@ -28,6 +28,7 @@ export const useDrawingBoardStore = create(
        */
       layers: [] as LayerInfo[],
       currentLayer: {} as LayerInfo,
+      snapshot: "" as string
     },
     (set, get) => ({
       clearLayers: () => set({ layers: [] }),
@@ -44,6 +45,9 @@ export const useDrawingBoardStore = create(
         const shaking = get().layers?.filter?.((layer) => layer.id !== currentLayer.id)
         set({ layers: [...shaking, currentLayer] })
       },
+      setSnapshot(snapshot: string) {
+        set({ snapshot })
+      }
     })
   )
 )

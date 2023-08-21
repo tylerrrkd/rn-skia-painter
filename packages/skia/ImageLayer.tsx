@@ -9,7 +9,7 @@ import { ShaderType } from 'app/features/carve/operations'
 
 export type ImageLayerProps = {
   shader: ShaderType
-} & SkiaProps<ImageProps>
+} & ImageProps
 
 const ShaderMap: Record<ShaderType, Parameters<typeof RuntimeShader>[number]['source']> = {
   'b/w': BLACK_AND_WHITE_SHADER,

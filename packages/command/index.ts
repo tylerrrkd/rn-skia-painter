@@ -135,7 +135,7 @@ export const useFileList = (path: string = '/') => {
 /**
  * @description 开始雕刻
  */
-export const useHandleExecPrint = () => {
+export const useHandleExecPrint = (onError?: (error: Error) => void) => {
   return useRequest(
     async ({ path, fileName }: { path: string; fileName: string }) => {
       const res = await axios({
@@ -149,7 +149,7 @@ export const useHandleExecPrint = () => {
       })
       return res?.data
     },
-    { manual: true }
+    { manual: true, onError }
   )
 }
 
