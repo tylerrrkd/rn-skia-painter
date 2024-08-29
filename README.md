@@ -1,8 +1,4 @@
-# Tamagui + Solito + Next + Expo Monorepo
-
-```sh
-npm create tamagui
-```
+# rn-skia-painter
 
 ## 🔦 About
 
