@@ -1,5 +1,7 @@
 # rn-skia-painter
 
+> A painter build with `react-native-skia`
+
 ## 🔦 About
 
 This monorepo is a starter for an Expo + Next.js + Tamagui + Solito app.
@@ -8,6 +10,7 @@ Many thanks to [@FernandoTheRojo](https://twitter.com/fernandotherojo) for the S
 
 ## 📦 Included packages
 
+- [@shopify/react-native-skia](https://github.com/Shopify/react-native-skia)
 - [Tamagui](https://tamagui.dev) 🪄
 - [solito](https://solito.dev) for cross-platform navigation
 - Expo SDK
